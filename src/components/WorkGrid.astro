@@ -1,0 +1,157 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+	/** Cap the number of frames shown. Omit to show all. */
+	limit?: number;
+}
+
+const { posts, limit } = Astro.props;
+const shown = limit ? posts.slice(0, limit) : posts;
+
+/**
+ * Frame marks read like film edge printing — A/01, A/02 ... B/01.
+ * Twelve frames to a roll, which is what makes the letter change.
+ */
+const frameMark = (i: number) =>
+	`${String.fromCharCode(65 + Math.floor(i / 12))}/${String((i % 12) + 1).padStart(2, '0')}`;
+---
+
+<ul class="sheet">
+	{
+		shown.map((post, i) => (
+			<li class="cell">
+				<a href={`/blog/${post.id}/`}>
+					<div class="frame">
+						{post.data.heroImage ? (
+							<Image
+								src={post.data.heroImage}
+								alt=""
+								width={800}
+								height={533}
+								widths={[400, 800]}
+								sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+							/>
+						) : (
+							/* Posts without a hero still get a frame, not a broken cell. */
+							<div class="frame-empty" aria-hidden="true" />
+						)}
+					</div>
+
+					<div class="caption">
+						<span class="mark">{frameMark(i)}</span>
+						<div class="meta">
+							<h3 class="title">{post.data.title}</h3>
+							<span class="date">
+								<FormattedDate date={post.data.pubDate} />
+							</span>
+						</div>
+					</div>
+				</a>
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	.sheet {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr));
+		gap: clamp(1.5rem, 3vw, 2.75rem) clamp(1.25rem, 2.5vw, 2rem);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.cell a {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	/* The frame itself — a hairline that lifts to sage on hover. */
+	.frame {
+		position: relative;
+		aspect-ratio: 3 / 2;
+		overflow: hidden;
+		background-color: var(--stone);
+		border: 1px solid var(--stone);
+		transition: border-color var(--dur) var(--ease);
+	}
+
+	.frame :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transform: scale(1.001); /* hides sub-pixel edge seams on scale-up */
+		transition:
+			transform var(--dur) var(--ease),
+			opacity var(--dur) var(--ease);
+		opacity: 0.92;
+	}
+
+	.frame-empty {
+		width: 100%;
+		height: 100%;
+		background-image: linear-gradient(135deg, var(--stone) 0%, var(--ink) 100%);
+	}
+
+	.cell a:hover .frame,
+	.cell a:focus-visible .frame {
+		border-color: var(--sage);
+	}
+
+	.cell a:hover .frame :global(img) {
+		transform: scale(1.03);
+		opacity: 1;
+	}
+
+	/* Edge printing: mark on the left, title and date beside it. */
+	.caption {
+		display: flex;
+		gap: 0.75rem;
+		padding-top: 0.7rem;
+	}
+
+	.mark {
+		flex: none;
+		font-family: var(--font-archivo);
+		font-size: var(--step--1);
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		color: var(--sage);
+		font-variant-numeric: tabular-nums;
+		padding-top: 0.15em;
+	}
+
+	.meta {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+		min-width: 0;
+	}
+
+	.title {
+		margin: 0;
+		font-size: var(--step-0);
+		font-weight: 600;
+		line-height: 1.25;
+		color: var(--paper);
+		transition: color var(--dur) var(--ease);
+	}
+
+	.cell a:hover .title {
+		color: var(--sage);
+	}
+
+	.date {
+		font-family: var(--font-archivo);
+		font-size: var(--step--1);
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--ash);
+	}
+</style>

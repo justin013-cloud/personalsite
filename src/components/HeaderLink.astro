@@ -9,16 +9,46 @@ const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<a
+	href={href}
+	class:list={[className, { active: isActive }]}
+	aria-current={isActive ? 'page' : undefined}
+	{...props}
+>
 	<slot />
 </a>
+
 <style>
 	a {
+		position: relative;
 		display: inline-block;
+		padding-block: 0.15em;
+		font-family: var(--font-archivo);
+		font-size: var(--step--1);
+		font-weight: 500;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
 		text-decoration: none;
+		color: var(--ash);
+		transition: color var(--dur) var(--ease);
 	}
+
+	a:hover {
+		color: var(--paper);
+	}
+
 	a.active {
-		font-weight: bolder;
-		text-decoration: underline;
+		color: var(--paper);
+	}
+
+	/* A sage rule held off the baseline, rather than a text underline. */
+	a.active::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: -0.35em;
+		height: 1px;
+		background-color: var(--sage);
 	}
 </style>

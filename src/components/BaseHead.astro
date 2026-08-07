@@ -32,6 +32,8 @@ const { title, description, image = FallbackImage } = Astro.props;
 />
 <meta name="generator" content={Astro.generator} />
 
+<!-- One <Font> per family, or its @font-face is never emitted. -->
+<Font cssVariable="--font-archivo" preload />
 <Font cssVariable="--font-atkinson" preload />
 
 <!-- Canonical URL -->

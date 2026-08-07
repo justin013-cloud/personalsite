@@ -11,76 +11,127 @@ type Props = CollectionEntry<'blog'>['data'];
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
+<!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
+		<BaseHead title={title} description={description} image={heroImage} />
 	</head>
 
 	<body>
 		<Header />
+
 		<main>
 			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
+				<header class="title">
+					<p class="eyebrow">
+						<FormattedDate date={pubDate} />
+						{
+							updatedDate && (
+								<span class="updated">
+									{' · Updated '}
+									<FormattedDate date={updatedDate} />
+								</span>
+							)
+						}
+					</p>
+					<h1>{title}</h1>
+					{description && <p class="description">{description}</p>}
+				</header>
+
+				{
+					heroImage && (
+						<figure class="hero-image">
+							<Image src={heroImage} alt="" width={1600} height={900} loading="eager" />
+						</figure>
+					)
+				}
+
 				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
 					<slot />
 				</div>
 			</article>
+
+			<nav class="post-nav">
+				<a href="/blog">Back to work</a>
+			</nav>
 		</main>
+
 		<Footer />
 	</body>
 </html>
+
+<style>
+	main {
+		max-width: 1180px;
+	}
+
+	.title {
+		max-width: var(--measure);
+		margin-inline: auto;
+		padding-bottom: clamp(2rem, 4vw, 3rem);
+	}
+
+	.title h1 {
+		margin: 0.75rem 0 0 0;
+		font-size: var(--step-4);
+		font-weight: 700;
+		letter-spacing: -0.028em;
+	}
+
+	.description {
+		margin: 1.25rem 0 0 0;
+		font-size: var(--step-1);
+		line-height: 1.45;
+		color: var(--ash);
+		text-wrap: pretty;
+	}
+
+	.updated {
+		font-style: normal;
+	}
+
+	/* Hero runs wider than the text column, so images carry more weight. */
+	.hero-image {
+		margin: 0 0 clamp(2.5rem, 5vw, 4rem) 0;
+		border: 1px solid var(--stone);
+		overflow: hidden;
+	}
+
+	.hero-image :global(img) {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+	}
+
+	.prose {
+		max-width: var(--measure);
+		margin-inline: auto;
+	}
+
+	.prose :global(h2),
+	.prose :global(h3) {
+		margin-top: 2.5em;
+	}
+
+	.prose :global(img) {
+		margin-block: 2rem;
+		border: 1px solid var(--stone);
+	}
+
+	.post-nav {
+		max-width: var(--measure);
+		margin: clamp(3rem, 6vw, 5rem) auto 0;
+		padding-top: 1.5rem;
+		border-top: var(--rule);
+	}
+
+	.post-nav a {
+		font-family: var(--font-archivo);
+		font-size: var(--step--1);
+		font-weight: 500;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		text-decoration: none;
+	}
+</style>

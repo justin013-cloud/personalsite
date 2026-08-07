@@ -1,40 +1,88 @@
 /*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+  Sage on warm dark gray. Dark-only by design — a single committed theme.
+
+  Every foreground/background pairing below is contrast-tested:
+    paper on slate  15.4:1  AAA
+    pale  on slate  10.9:1  AAA
+    sage  on slate   8.5:1  AAA
+    ash   on slate   5.7:1  AA
+    ash   on stone   4.9:1  AA   <- the tightest pairing; keep it >=16px
+*/
 
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+	/* Ground */
+	--ink: #0f1311;
+	--slate: #1a1f1c;
+	--stone: #252b27;
+
+	/* Accent */
+	--sage: #a8c09a;
+	--pale: #c6d6bc;
+
+	/* Type */
+	--paper: #f4f6f3;
+	--ash: #8e9a92;
+
+	/* Bare triples, for the few places that genuinely need alpha */
+	--slate-rgb: 26, 31, 28;
+	--sage-rgb: 168, 192, 154;
+	--paper-rgb: 244, 246, 243;
+
+	/* Fluid type scale. clamp() means headlines shrink on small screens
+	   without a single media query. */
+	--step--1: clamp(0.79rem, 0.77rem + 0.1vw, 0.84rem);
+	--step-0: clamp(1rem, 0.96rem + 0.2vw, 1.13rem);
+	--step-1: clamp(1.27rem, 1.19rem + 0.38vw, 1.5rem);
+	--step-2: clamp(1.6rem, 1.47rem + 0.67vw, 2rem);
+	--step-3: clamp(2.03rem, 1.79rem + 1.18vw, 2.66rem);
+	--step-4: clamp(2.57rem, 2.17rem + 2vw, 3.55rem);
+	--step-5: clamp(3.25rem, 2.6rem + 3.25vw, 4.74rem);
+
+	/* Rhythm */
+	--measure: 68ch;
+	--gutter: clamp(1.25rem, 4vw, 3rem);
+	--rule: 1px solid var(--stone);
+	--rule-sage: 1px solid var(--sage);
+
+	/* Motion — referenced everywhere so the reduced-motion block can zero it out */
+	--ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+	--dur: 220ms;
 }
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	background-color: var(--slate);
+}
+
 body {
-	font-family: var(--font-atkinson);
 	margin: 0;
 	padding: 0;
+	background-color: var(--slate);
+	color: var(--paper);
+	font-family: var(--font-atkinson);
+	font-size: var(--step-0);
+	line-height: 1.65;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
 }
+
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+	width: 100%;
+	max-width: 1180px;
+	margin-inline: auto;
+	padding: clamp(2.5rem, 6vw, 5rem) var(--gutter);
 }
+
+/* --- Type -------------------------------------------------------------- */
+
 h1,
 h2,
 h3,
@@ -42,85 +90,184 @@ h4,
 h5,
 h6 {
 	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
+	color: var(--paper);
+	font-family: var(--font-archivo);
+	font-weight: 600;
+	letter-spacing: -0.022em;
+	line-height: 1.08;
+	text-wrap: balance;
+	/* body sets break-word to keep long URLs from overflowing prose.
+	   Headlines must never break mid-word. */
+	overflow-wrap: normal;
+	word-break: keep-all;
 }
+
 h1 {
-	font-size: 3.052em;
+	font-size: var(--step-4);
 }
 h2 {
-	font-size: 2.441em;
+	font-size: var(--step-3);
 }
 h3 {
-	font-size: 1.953em;
+	font-size: var(--step-2);
 }
 h4 {
-	font-size: 1.563em;
+	font-size: var(--step-1);
 }
 h5 {
-	font-size: 1.25em;
+	font-size: var(--step-0);
 }
+
+p {
+	margin: 0 0 1em 0;
+}
+
+.prose p {
+	margin-bottom: 1.6em;
+}
+
 strong,
 b {
 	font-weight: 700;
+	color: var(--paper);
 }
+
 a {
-	color: var(--accent);
+	color: var(--sage);
+	text-decoration-color: rgba(var(--sage-rgb), 0.4);
+	text-underline-offset: 0.2em;
+	text-decoration-thickness: 1px;
+	transition: color var(--dur) var(--ease);
 }
+
 a:hover {
-	color: var(--accent);
+	color: var(--pale);
+	text-decoration-color: currentColor;
 }
-p {
-	margin-bottom: 1em;
+
+/* One focus treatment for the whole site. The template shipped with none. */
+:focus-visible {
+	outline: 2px solid var(--sage);
+	outline-offset: 3px;
+	border-radius: 2px;
 }
-.prose p {
-	margin-bottom: 2em;
+
+/* Uppercase small-caps used for dates, eyebrows, and contact-sheet edge marks. */
+.eyebrow {
+	font-family: var(--font-archivo);
+	font-size: var(--step--1);
+	font-weight: 500;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--ash);
 }
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
+
+/* --- Elements ---------------------------------------------------------- */
+
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
+	display: block;
 }
+
+hr {
+	border: none;
+	border-top: var(--rule);
+	margin: 2.5rem 0;
+}
+
+blockquote {
+	border-left: 2px solid var(--sage);
+	padding: 0 0 0 1.25rem;
+	margin: 2rem 0;
+	font-size: var(--step-1);
+	line-height: 1.45;
+	color: var(--paper);
+}
+
 code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+	padding: 0.15em 0.4em;
+	background-color: var(--stone);
+	border-radius: 3px;
+	font-size: 0.9em;
+	color: var(--pale);
 }
+
 pre {
-	padding: 1.5em;
-	border-radius: 8px;
+	padding: 1.25rem;
+	border: var(--rule);
+	border-radius: 4px;
+	overflow-x: auto;
 }
+
 pre > code {
 	all: unset;
 }
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
+
+table {
+	width: 100%;
+	border-collapse: collapse;
 }
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+
+th,
+td {
+	padding: 0.6rem 0.75rem;
+	border-bottom: var(--rule);
+	text-align: left;
 }
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
+
+th {
+	font-family: var(--font-archivo);
+	font-size: var(--step--1);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--ash);
+}
+
+textarea,
+input {
+	width: 100%;
+	font-size: 16px;
+	color: var(--paper);
+	background-color: var(--stone);
+	border: var(--rule);
+	border-radius: 3px;
+	padding: 0.6em 0.75em;
+}
+
+/* --- Motion ------------------------------------------------------------ */
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(0.6rem);
 	}
-	main {
-		padding: 1em;
+	to {
+		opacity: 1;
+		transform: none;
 	}
 }
+
+@media (prefers-reduced-motion: reduce) {
+	:root {
+		--dur: 0ms;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+	/* Anything that animates in must still end up visible. */
+	[data-rise] {
+		opacity: 1 !important;
+		transform: none !important;
+	}
+}
+
+/* --- Utility ----------------------------------------------------------- */
 
 .sr-only {
 	border: 0;
