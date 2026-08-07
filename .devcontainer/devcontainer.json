@@ -1,0 +1,28 @@
+{
+	"name": "justin-demo (Astro)",
+
+	// Node 22, matching .nvmrc. Astro's installer rejects anything older.
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:22-bookworm",
+
+	// Astro's dev server port. Codespaces opens a preview automatically.
+	"forwardPorts": [4321],
+	"portsAttributes": {
+		"4321": {
+			"label": "Astro dev server",
+			"onAutoForward": "openPreview"
+		}
+	},
+
+	// Runs once when the environment is first created.
+	"postCreateCommand": "npm install",
+
+	"customizations": {
+		"vscode": {
+			// Same list as .vscode/extensions.json, installed rather than suggested.
+			"extensions": ["astro-build.astro-vscode", "unifiedjs.vscode-mdx"],
+			"settings": {
+				"files.eol": "\n"
+			}
+		}
+	}
+}
