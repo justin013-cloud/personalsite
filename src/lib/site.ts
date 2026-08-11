@@ -16,6 +16,15 @@ const schema = z.object({
 	showreelUrl: z.string().url().regex(/vimeo\.com/, 'Must be a Vimeo URL'),
 	showreelLabel: z.string().min(1),
 
+	/**
+	 * The picture that shows when the site is shared on LinkedIn.
+	 *
+	 * Optional: left empty, the showreel's Vimeo thumbnail is used, which is
+	 * already a branded title card. Upload something here to override it.
+	 * Ideal size is 1200x630.
+	 */
+	socialImage: z.string().optional().default(''),
+
 	email: z.string().email(),
 	linkedin: z.string().url(),
 	vimeo: z.string().url(),

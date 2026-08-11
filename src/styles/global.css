@@ -257,6 +257,84 @@ th {
 	}
 }
 
+/* --- Print -------------------------------------------------------------
+
+	Without this block, printing any page produces a blank sheet.
+
+	Browsers omit background colours by default — Chrome's "Background graphics"
+	box is unchecked — so the near-black ground disappears while the white text
+	stays white, and white on white paper is nothing. That matters most on the
+	About page, which is the closest thing here to a résumé and the page a
+	recruiter is most likely to hit Cmd+P on.
+
+	So the palette flips for print: black on white, with the accent darkened
+	because #4686c6 is only 3.83:1 on white and this is the one context where
+	the ground genuinely is white.
+------------------------------------------------------------------------- */
+
+@media print {
+	:root {
+		--ink: #ffffff;
+		--surface: #ffffff;
+		--hairline: #cccccc;
+		--paper: #000000;
+		--ash: #444444;
+		--brand: #2f6099; /* 6.45:1 on white */
+		--brand-bright: #2f6099;
+	}
+
+	html,
+	body {
+		background: #fff !important;
+		color: #000 !important;
+		font-size: 11pt;
+	}
+
+	/*
+		Navigation and the skip link are meaningless on paper, and so is a play
+		button.
+
+		Note the direct-child selectors: the site header and footer are children
+		of <body>, but pages also use <header> inside <main> for their titles —
+		on a work page that block holds the title, award, and brief. A bare
+		`header` rule here would print those pages with no heading at all.
+	*/
+	body > header,
+	body > footer,
+	.skip,
+	.embed {
+		display: none !important;
+	}
+
+	main {
+		max-width: none;
+		padding: 0;
+	}
+
+	/* On paper a link's destination is invisible, so print it. mailto: links
+	   are skipped — their text is already the address. */
+	a[href^='http']::after {
+		content: ' (' attr(href) ')';
+		font-size: 0.85em;
+		font-weight: 400;
+		color: #444;
+		word-break: break-all;
+	}
+
+	/* Don't split a job or an award across a page break. */
+	.history > li,
+	.awards li,
+	.row {
+		break-inside: avoid;
+	}
+
+	h1,
+	h2,
+	h3 {
+		break-after: avoid;
+	}
+}
+
 /* --- Utility ----------------------------------------------------------- */
 
 .sr-only {

@@ -308,6 +308,18 @@ collections:
             name: showreelLabel
             widget: string
             hint: 'For example: 2026 Showreel'
+          - label: Social share image
+            name: socialImage
+            widget: image
+            required: false
+            # Social scrapers need a plain static URL, so these go in public/
+            # rather than src/assets — unlike poster frames, which Astro
+            # processes. Hence the per-field override.
+            media_folder: /public/uploads
+            public_folder: /uploads
+            hint: >-
+              Shown when the site is shared on LinkedIn. Best at 1200x630. Leave
+              empty and the showreel thumbnail is used automatically.
           - label: Email
             name: email
             widget: string
