@@ -1,63 +1,99 @@
-# Astro Starter Kit: Blog
+# justindsims.com
 
-```sh
-npm create astro@latest -- --template blog
+Portfolio site for Justin D. Sims — motion graphics, video editing, storytelling.
+
+Built with [Astro](https://docs.astro.build). Content lives in Markdown files in
+the repo. Pushing to `main` publishes automatically through Netlify.
+
+---
+
+## Adding a project (no code)
+
+Go to **[justindsims.com/admin/](https://justindsims.com/admin/)** and sign in
+with GitHub. You'll get a normal editing screen — click **Work → New Project**,
+fill in the fields, and hit publish. The site rebuilds itself in about a minute.
+
+You don't need to install anything. It's a web page, and it works on a tablet.
+
+The only field that has to be exact is **Vimeo URL** — copy the link straight
+from your browser's address bar, like `https://vimeo.com/816579985`. Everything
+else is free text.
+
+A few notes:
+
+- **Orientation** — set this to `vertical` for 9:16 social cuts. It changes how
+  the video is framed on the page so it doesn't get letterboxed.
+- **Poster frame** — optional. Leave it empty and the site pulls the thumbnail
+  from Vimeo automatically. Upload one if you want to pick the exact frame.
+- **Show on homepage** — controls whether it appears on the front page. Every
+  project shows on `/work` regardless.
+- **Draft** — hides it from the live site without deleting it.
+
+## Adding a project (the file version)
+
+If you'd rather edit files directly, each project is one Markdown file in
+`src/content/work/`. Copy an existing one and change the values:
+
+```yaml
+---
+title: 'CSG Encompass Explainer'
+vimeo: 'https://vimeo.com/1208913080'
+orientation: 'horizontal' # or 'vertical'
+client: 'CSG Systems'
+role: 'Senior Video Production Specialist'
+date: 2026-07-10
+brief: 'One or two sentences about the brief.'
+award: 'Gold Winner · Aster Awards 2024' # optional
+featured: true
+order: 1
+---
+
+The long "what I did" writeup goes here, in plain Markdown.
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The filename becomes the URL: `csg-encompass-explainer.md` → `/work/csg-encompass-explainer/`.
 
-Features:
+If you get a field wrong, the build fails with a message telling you which file
+and which field. It won't publish something broken.
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+## Other things you might want to change
 
-## 🚀 Project Structure
+| What | Where |
+| --- | --- |
+| Showreel at the top of the homepage | `SHOWREEL` in `src/consts.ts` |
+| Email, LinkedIn, Vimeo links | `LINKS` in `src/consts.ts` |
+| Bio, job history, awards, tools | `src/pages/about.astro` |
+| Colours and type sizes | `src/styles/global.css` |
 
-Inside of your Astro project, you'll see the following folders and files:
+---
 
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+## For developers
+
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # outputs to ./dist
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+**Stack:** Astro 7, static output, zero client JS except a small script that
+swaps in the Vimeo player on click. Fonts (Science Gothic, Roboto) are
+self-hosted at build time via Astro's font provider — no runtime request to
+Google.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+**Content model:** one collection, `work`, defined in `src/content.config.ts`.
+The Zod schema is the source of truth; `public/admin/config.yml` mirrors it for
+the CMS. **Change one and you must change the other.**
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+**Video embeds** use a facade — poster image plus a play button, with the iframe
+injected on click. Five live Vimeo iframes on one page is several megabytes, and
+most visitors play one at most. Poster resolution falls back in three tiers:
+uploaded image → Vimeo thumbnail (fetched at build) → plain title card. A Vimeo
+outage degrades the poster; it never fails the build.
 
-Any static assets, like images, can be placed in the `public/` directory.
+**Colour:** the site is dark by design. `#4686c6` on white is 3.83:1, which
+fails WCAG AA for body text; on `#161616` it's 4.73:1 and passes. That's why the
+brand blue can be used exactly as specified — see the notes at the top of
+`src/styles/global.css`.
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+**Deployment:** push to `main` → Netlify builds with `npm run build` and
+publishes `dist`. Config is in `netlify.toml`.

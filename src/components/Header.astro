@@ -8,24 +8,18 @@ import HeaderLink from './HeaderLink.astro';
 		<a class="wordmark" href="/">{SITE_TITLE}</a>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Work</HeaderLink>
+			<HeaderLink href="/work">Work</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 	</nav>
 </header>
-
-<!--
-	Social links live here. The starter template shipped with Astro's own
-	Mastodon/Twitter/GitHub accounts, which have been removed. To add yours,
-	drop anchors into a <div class="social-links"> after .internal-links.
--->
 
 <style>
 	header {
 		position: sticky;
 		top: 0;
 		z-index: 10;
-		background-color: rgba(var(--slate-rgb), 0.85);
+		background-color: rgba(var(--ink-rgb), 0.85);
 		backdrop-filter: blur(10px);
 		border-bottom: var(--rule);
 	}
@@ -34,24 +28,35 @@ import HeaderLink from './HeaderLink.astro';
 		display: flex;
 		align-items: baseline;
 		justify-content: space-between;
-		gap: 1.5rem;
-		max-width: 1180px;
+		/* Wraps rather than squashing: on a narrow phone the links drop to a
+		   second line, which reads as intentional. A broken wordmark does not. */
+		flex-wrap: wrap;
+		gap: 0.5rem 1.5rem;
+		max-width: var(--wide);
 		margin-inline: auto;
 		padding: 1.1rem var(--gutter);
 	}
 
 	.wordmark {
-		font-family: var(--font-archivo);
+		font-family: var(--font-display);
 		font-size: var(--step-0);
 		font-weight: 700;
-		letter-spacing: 0.02em;
+		letter-spacing: 0.01em;
 		color: var(--paper);
 		text-decoration: none;
+		/* His name is the one string on the site that must never break. */
+		white-space: nowrap;
 		transition: color var(--dur) var(--ease);
 	}
 
+	@media (min-width: 30em) {
+		.wordmark {
+			font-size: var(--step-1);
+		}
+	}
+
 	.wordmark:hover {
-		color: var(--sage);
+		color: var(--brand);
 	}
 
 	.internal-links {

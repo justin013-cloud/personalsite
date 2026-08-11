@@ -1,0 +1,46 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="Not found" description="That page doesn't exist." />
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<div class="lost">
+				<p class="eyebrow">Error 404</p>
+				<h1>Nothing here</h1>
+				<p class="say">That page doesn't exist — it may have moved, or the link may be wrong.</p>
+				<p>
+					<a href="/work">See the work</a> or <a href="/">head back to the start</a>.
+				</p>
+			</div>
+		</main>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.lost {
+		max-width: 46ch;
+		padding-block: clamp(3rem, 10vw, 7rem);
+	}
+
+	.lost h1 {
+		margin: 0.5rem 0 0 0;
+		font-size: var(--step-5);
+	}
+
+	.say {
+		margin: 1.25rem 0 1rem 0;
+		font-size: var(--step-1);
+		color: var(--ash);
+	}
+</style>
