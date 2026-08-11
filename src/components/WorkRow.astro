@@ -7,9 +7,19 @@ interface Props {
 	entry: CollectionEntry<'work'>;
 	/** Even rows put the video first, odd rows flip it. */
 	index: number;
+	/**
+	 * Which heading level the project title should be.
+	 *
+	 * On the homepage these rows sit under a "Selected work" h2, so h3 is
+	 * correct. On /work/ there is no such heading, and hardcoding h3 there
+	 * would skip from h1 straight to h3 — a broken outline for anyone
+	 * navigating by headings.
+	 */
+	headingLevel?: 2 | 3;
 }
 
-const { entry, index } = Astro.props;
+const { entry, index, headingLevel = 3 } = Astro.props;
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
 const { title, brief, client, role, date, orientation, award, poster, vimeo } = entry.data;
 
 const href = `/work/${entry.id}/`;
@@ -24,9 +34,9 @@ const isVertical = orientation === 'vertical';
 	<div class="detail">
 		{award && <p class="award">{award}</p>}
 
-		<h3 class="title">
+		<Heading class="title">
 			<a href={href}>{title}</a>
-		</h3>
+		</Heading>
 
 		<p class="meta">
 			{client}
