@@ -1,64 +1,424 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/Page.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { LINKS } from '../consts';
+
+/*
+	Content here comes from Justin's resume. Two things from that document are
+	deliberately left off: his mobile number, and the four professional
+	references. Those reference entries carry other people's personal phone
+	numbers and private email addresses — publishing them exposes people who
+	never agreed to it, and scrapers harvest them within days. References belong
+	in a PDF sent on request.
+*/
+
+const history = [
+	{
+		role: 'Senior Video Production Specialist',
+		company: 'CSG Systems',
+		note: 'Acquired by NEC Corporation',
+		period: '2024 – 2026',
+		points: [
+			'Produce 50+ videos annually spanning motion graphics, AI-generated content, stock footage, voice-over, and music for trade shows, broadcast TV, social media, and web distribution.',
+			'Led an LED installation project, designing motion graphics for an immersive 8x8 foot cube display as part of a live internal broadcast presentation.',
+			'Partner cross-functionally to develop video strategies, campaign messaging, and branded content across B2B audiences.',
+		],
+	},
+	{
+		role: 'Video & Motion Director',
+		company: 'Boyden & Youngblutt',
+		period: '2019 – 2024',
+		points: [
+			'Directed end-to-end live action and motion graphics productions for advertising campaigns, applying cinematography, editing, dynamic typography, and visual design throughout each project.',
+			'Built and led a small creative team, managing workflows and mentoring junior talent from intern to full staff.',
+			'Collaborated with clients, internal staff, and vendors to deliver polished final projects for organizations ranging from startups to multinational corporations.',
+		],
+	},
+	{
+		role: 'Videographer & Animator',
+		company: 'Aptera Software',
+		note: 'Acquired by Core BTS',
+		period: '2017 – 2018',
+		points: [
+			'Developed, filmed, edited, and animated marketing videos showcasing custom software solutions across desktop, web, and mobile platforms.',
+			'Contributed to a full company rebrand including logo design, typography animation, visual identity systems, and brand messaging strategy.',
+		],
+	},
+	{
+		role: 'Digital Media Specialist',
+		company: 'LYFT Digital / Enspire Software / ENS Group',
+		note: 'Acquired by Corsica Technologies',
+		period: '2013 – 2016',
+		points: [
+			'Created and produced branding videos for multiple companies and subsidiaries, managing end-to-end creative production from concept through final delivery.',
+			'Preserved distinct brand identities across clients using brand voice, typography, iconography, and color theory in both live action and motion graphics projects.',
+		],
+	},
+	{
+		role: 'Technical Director / Graphics & Audio',
+		company: 'WFFT Local / Fox55',
+		period: '2011 – 2013',
+		points: [
+			'Directed and operated a live video switcher simultaneously during broadcast newscasts, demonstrating real-time decision-making and leadership.',
+			'Designed on-air graphics to enhance broadcast visual quality and produced promotional ads and reels using corporate brand standards.',
+		],
+	},
+];
+
+const awards = [
+	{ honor: 'Gold Winner', body: 'Aster Awards', year: '2024', work: 'Exactech, Inc. Brand Anthem Video' },
+	{ honor: 'Silver Winner', body: 'Aster Awards', year: '2024', work: 'Exactech, Inc. Exactly Brand Campaign' },
+	{ honor: 'Silver Winner', body: 'The Telly Awards', year: '2020', work: 'Zimmer Biomet Connect' },
+	{ honor: 'Merit', body: 'Healthcare Advertising Awards', year: '2020', work: 'Zimmer Biomet Connect' },
+	{ honor: 'Best Hoosier Film', body: 'Hobnobben Film Festival', year: '2018', work: 'Knock. Knock. Knock.' },
+	{ honor: 'Gold Ad Honor', body: 'American Advertising Federation of Fort Wayne', year: '2016', work: 'SmartSource from ENS Group' },
+	{ honor: 'Gold Winner', body: 'American Advertising Federation of Fort Wayne', year: '2016', work: 'So You Want to Work for Enspire?' },
+];
+
+const competencies = [
+	'Motion Graphics', 'Video Editing', 'Cinematography', 'Lighting', 'Color Grading',
+	'Visual Storytelling', 'Brand Identity', 'Typography', 'Storyboarding', 'Scriptwriting',
+	'Directing', 'Producing', 'Creative Concept Development', 'Project Management', 'Team Management',
+];
+
+const tools = [
+	'After Effects', 'Premiere Pro', 'Audition', 'Illustrator', 'Photoshop',
+	'Firefly', 'Google Veo 3', 'ElevenLabs', 'ChatGPT', 'Claude',
+];
 ---
 
-{/* PLACEHOLDER COPY — the body below is still lorem ipsum. Replace it. */}
-<Layout
-	title="About"
-	description="Designer and videographer."
-	eyebrow="Who I am"
-	image={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="About"
+			description="Justin D. Sims is a video production professional with 10+ years bridging live-action cinematography and motion graphics."
+		/>
+	</head>
+	<body>
+		<Header />
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+		<main>
+			<header class="page-title">
+				<p class="eyebrow">Who I am</p>
+				<h1>About</h1>
+			</header>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+			<section class="profile">
+				<p class="lead">
+					Video production professional with 10+ years of experience bridging live action
+					cinematography and motion graphics to craft cohesive, story-driven content.
+				</p>
+				<p>
+					Equally fluent on set and in post-production, combining both disciplines to build
+					narratives that are visually compelling at every layer. Experienced leading creative
+					production for agencies and in-house teams across advertising, B2B, and digital media,
+					with a growing fluency in AI-assisted video tools that accelerate production without{' '}
+					<!-- TODO: the resume scan cuts off here. Finish this sentence in your own words. -->
+					<em>[finish this line]</em>.
+				</p>
+			</section>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+			<section aria-labelledby="history-heading">
+				<h2 id="history-heading" class="section-head">Professional history</h2>
+				<ol class="history">
+					{
+						history.map((job) => (
+							<li>
+								<div class="when">
+									<span class="period">{job.period}</span>
+								</div>
+								<div class="what">
+									<h3>{job.role}</h3>
+									<p class="company">
+										{job.company}
+										{job.note && <span class="note">({job.note})</span>}
+									</p>
+									<ul>
+										{job.points.map((point) => (
+											<li>{point}</li>
+										))}
+									</ul>
+								</div>
+							</li>
+						))
+					}
+				</ol>
+			</section>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+			<section aria-labelledby="awards-heading">
+				<h2 id="awards-heading" class="section-head">Awards &amp; recognition</h2>
+				<ul class="awards">
+					{
+						awards.map((award) => (
+							<li>
+								<span class="honor">{award.honor}</span>
+								<span class="body">
+									{award.body} · {award.year}
+								</span>
+								<span class="work">{award.work}</span>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+
+			<section aria-labelledby="skills-heading">
+				<h2 id="skills-heading" class="section-head">Capabilities &amp; tools</h2>
+				<div class="skills">
+					<div>
+						<h3>Core competencies</h3>
+						<ul class="tags">
+							{competencies.map((item) => <li>{item}</li>)}
+						</ul>
+					</div>
+					<div>
+						<h3>Tools &amp; software</h3>
+						<ul class="tags">
+							<li>Adobe Creative Cloud</li>
+							{tools.map((item) => <li>{item}</li>)}
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section aria-labelledby="education-heading">
+				<h2 id="education-heading" class="section-head">Education</h2>
+				<p class="degree">B.A. Computer Art — 3-D Computer Animation</p>
+				<p class="school">University of Saint Francis, School of Creative Arts · Fort Wayne, IN</p>
+			</section>
+
+			<section aria-labelledby="contact-heading" class="contact">
+				<h2 id="contact-heading" class="section-head">Get in touch</h2>
+				<p class="pitch">Available for freelance and full-time work.</p>
+				<ul class="contact-links">
+					<li><a href={`mailto:${LINKS.email}`}>{LINKS.email}</a></li>
+					<li><a href={LINKS.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>
+					<li><a href={LINKS.vimeo} rel="me noopener" target="_blank">Vimeo</a></li>
+				</ul>
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.page-title {
+		padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+	}
+
+	.page-title h1 {
+		margin: 0.5rem 0 0 0;
+		font-size: var(--step-5);
+	}
+
+	section {
+		padding-block: clamp(2rem, 5vw, 3.5rem);
+		border-top: var(--rule);
+	}
+
+	.profile {
+		border-top: none;
+		padding-top: 0;
+		max-width: var(--measure);
+	}
+
+	.lead {
+		font-size: var(--step-2);
+		font-family: var(--font-display);
+		font-weight: 700;
+		line-height: 1.15;
+		color: var(--paper);
+		text-wrap: pretty;
+	}
+
+	.profile p:not(.lead) {
+		color: var(--ash);
+		font-size: var(--step-1);
+		line-height: 1.5;
+	}
+
+	.section-head {
+		margin: 0 0 clamp(1.5rem, 3vw, 2.25rem) 0;
+		font-size: var(--step-1);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--ash);
+	}
+
+	/* --- History --- */
+
+	.history {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: clamp(2rem, 4vw, 3rem);
+	}
+
+	.history > li {
+		display: grid;
+		gap: 0.5rem 2rem;
+	}
+
+	@media (min-width: 48em) {
+		.history > li {
+			grid-template-columns: 10rem 1fr;
+		}
+	}
+
+	.period {
+		font-size: var(--step--1);
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		color: var(--brand);
+		font-variant-numeric: tabular-nums;
+	}
+
+	.what h3 {
+		margin: 0;
+		font-size: var(--step-1);
+	}
+
+	.company {
+		margin: 0.25rem 0 0.75rem 0;
+		font-size: var(--step-0);
+		color: var(--paper);
+	}
+
+	.note {
+		margin-left: 0.5em;
+		font-size: var(--step--1);
+		font-style: italic;
+		color: var(--ash);
+	}
+
+	.what ul {
+		margin: 0;
+		padding-left: 1.1rem;
+		display: grid;
+		gap: 0.5rem;
+		color: var(--ash);
+	}
+
+	.what ul li {
+		padding-left: 0.25rem;
+	}
+
+	.what ul li::marker {
+		color: var(--brand);
+	}
+
+	/* --- Awards --- */
+
+	.awards {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+		gap: 1.5rem;
+	}
+
+	.awards li {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		padding-left: 0.9rem;
+		border-left: 2px solid var(--brand);
+	}
+
+	.honor {
+		font-size: var(--step--1);
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--brand);
+	}
+
+	.awards .body {
+		color: var(--paper);
+		font-weight: 700;
+	}
+
+	.work {
+		font-style: italic;
+		color: var(--ash);
+	}
+
+	/* --- Skills --- */
+
+	.skills {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+		gap: clamp(1.5rem, 4vw, 3rem);
+	}
+
+	.skills h3 {
+		margin: 0 0 1rem 0;
+		font-size: var(--step-0);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--ash);
+	}
+
+	.tags {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.tags li {
+		padding: 0.3em 0.75em;
+		border: 1px solid var(--hairline);
+		border-radius: 999px;
+		font-size: var(--step--1);
+		background-color: var(--surface);
+	}
+
+	/* --- Education & contact --- */
+
+	.degree {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: var(--step-1);
+		font-weight: 700;
+	}
+
+	.school {
+		margin: 0.35rem 0 0 0;
+		color: var(--ash);
+	}
+
+	.pitch {
+		margin: 0 0 1.25rem 0;
+		font-size: var(--step-1);
+		color: var(--paper);
+	}
+
+	.contact-links {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem 2rem;
+	}
+
+	.contact-links a {
+		font-size: var(--step-1);
+		font-weight: 700;
+		text-decoration: none;
+		border-bottom: 1px solid rgba(var(--brand-rgb), 0.4);
+		padding-bottom: 0.2em;
+	}
+
+	.contact-links a:hover {
+		border-bottom-color: currentColor;
+	}
+</style>

@@ -1,0 +1,229 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import VimeoEmbed from '../../components/VimeoEmbed.astro';
+import { vimeoPoster } from '../../lib/vimeo';
+
+export async function getStaticPaths() {
+	const projects = (await getCollection('work', ({ data }) => !data.draft)).sort(
+		(a, b) => a.data.order - b.data.order || b.data.date.valueOf() - a.data.date.valueOf(),
+	);
+
+	return projects.map((entry, i) => ({
+		params: { slug: entry.id },
+		props: {
+			entry,
+			prev: projects[i - 1],
+			next: projects[i + 1],
+		},
+	}));
+}
+
+interface Props {
+	entry: CollectionEntry<'work'>;
+	prev?: CollectionEntry<'work'>;
+	next?: CollectionEntry<'work'>;
+}
+
+const { entry, prev, next } = Astro.props;
+const { title, brief, client, role, date, orientation, award, poster, vimeo } = entry.data;
+const { Content } = await render(entry);
+
+// Vimeo's thumbnail doubles as the social card, so shared links aren't bare text.
+const social = poster ? poster.src : await vimeoPoster(vimeo);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={brief} image={social ?? undefined} type="article" />
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<article>
+				<header class="head">
+					{client && <p class="eyebrow">{client}</p>}
+					{award && <p class="award">{award}</p>}
+					<h1>{title}</h1>
+					<p class="brief">{brief}</p>
+				</header>
+
+				<div class:list={['stage', orientation]}>
+					<VimeoEmbed url={vimeo} title={title} orientation={orientation} poster={poster} />
+				</div>
+
+				<dl class="facts">
+					{
+						client && (
+							<div>
+								<dt>Client</dt>
+								<dd>{client}</dd>
+							</div>
+						)
+					}
+					{
+						role && (
+							<div>
+								<dt>Role</dt>
+								<dd>{role}</dd>
+							</div>
+						)
+					}
+					<div>
+						<dt>Released</dt>
+						<dd><FormattedDate date={date} /></dd>
+					</div>
+					<div>
+						<dt>Format</dt>
+						<dd>{orientation === 'vertical' ? 'Vertical · 9:16' : 'Horizontal · 16:9'}</dd>
+					</div>
+				</dl>
+
+				<div class="prose">
+					<h2>What I did</h2>
+					<Content />
+				</div>
+			</article>
+
+			{
+				(prev || next) && (
+					<nav class="pager" aria-label="More work">
+						{prev ? (
+							<a href={`/work/${prev.id}/`} class="prev">
+								<span class="eyebrow">Previous</span>
+								<span class="label">{prev.data.title}</span>
+							</a>
+						) : (
+							<span />
+						)}
+						{next && (
+							<a href={`/work/${next.id}/`} class="next">
+								<span class="eyebrow">Next</span>
+								<span class="label">{next.data.title}</span>
+							</a>
+						)}
+					</nav>
+				)
+			}
+		</main>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.head {
+		max-width: 60ch;
+		padding-bottom: clamp(1.75rem, 4vw, 2.75rem);
+	}
+
+	.head h1 {
+		margin: 0.5rem 0 0 0;
+		font-size: var(--step-5);
+		line-height: 0.98;
+	}
+
+	.award {
+		margin: 0.75rem 0 0 0;
+		padding-left: 0.75rem;
+		border-left: 2px solid var(--brand);
+		font-size: var(--step--1);
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--brand);
+	}
+
+	.brief {
+		margin: 1.25rem 0 0 0;
+		font-size: var(--step-1);
+		line-height: 1.45;
+		color: var(--ash);
+		text-wrap: pretty;
+	}
+
+	/*
+		A 9:16 player at full width is nearly twice the height of the screen it's
+		on. The cap is driven by viewport height as well as width, so the whole
+		video stays visible without scrolling no matter the device — that's the
+		vh term, and it's what stops a vertical piece running away on a phone.
+	*/
+	.stage.vertical {
+		max-width: min(420px, 68vw, calc(72vh * 9 / 16));
+		margin-inline: auto;
+	}
+
+	.facts {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+		gap: 1.5rem;
+		margin: clamp(2rem, 4vw, 3rem) 0 0 0;
+		padding-block: clamp(1.5rem, 3vw, 2rem);
+		border-top: var(--rule);
+		border-bottom: var(--rule);
+	}
+
+	.facts dt {
+		font-size: var(--step--1);
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--ash);
+	}
+
+	.facts dd {
+		margin: 0.35rem 0 0 0;
+		color: var(--paper);
+	}
+
+	.prose {
+		max-width: var(--measure);
+		padding-top: clamp(2.5rem, 5vw, 4rem);
+	}
+
+	.prose h2 {
+		font-size: var(--step-2);
+		letter-spacing: 0.02em;
+		margin-bottom: 1rem;
+	}
+
+	.pager {
+		display: flex;
+		justify-content: space-between;
+		gap: 2rem;
+		margin-top: clamp(3rem, 6vw, 5rem);
+		padding-top: 2rem;
+		border-top: var(--rule);
+	}
+
+	.pager a {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		text-decoration: none;
+		max-width: 20ch;
+	}
+
+	.pager .next {
+		text-align: right;
+		margin-left: auto;
+	}
+
+	.pager .label {
+		font-family: var(--font-display);
+		font-size: var(--step-1);
+		color: var(--paper);
+		line-height: 1.1;
+		transition: color var(--dur) var(--ease);
+	}
+
+	.pager a:hover .label {
+		color: var(--brand);
+	}
+</style>

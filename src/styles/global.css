@@ -1,32 +1,38 @@
 /*
-  Sage on warm dark gray. Dark-only by design — a single committed theme.
+  Justin D. Sims — motion graphics, video editing, storytelling.
 
-  Every foreground/background pairing below is contrast-tested:
-    paper on slate  15.4:1  AAA
-    pale  on slate  10.9:1  AAA
-    sage  on slate   8.5:1  AAA
-    ash   on slate   5.7:1  AA
-    ash   on stone   4.9:1  AA   <- the tightest pairing; keep it >=16px
+  Palette comes straight from his resume: near-black ground, white type, one
+  blue accent. Dark by design and dark only — video reads better surrounded by
+  black, and a single committed theme is one thing to maintain instead of two.
+
+  Every pairing below is measured, not guessed:
+    paper  on ink      18.1:1  AAA
+    ash    on ink       6.4:1  AA
+    brand  on ink       4.7:1  AA   <- the accent at its specified value
+    bright on ink       6.8:1  AA   <- hover state
+    paper  on surface  16.7:1  AAA
+
+  Note: #4686c6 is 3.8:1 on white, which fails AA. That is why the site is built
+  dark — it lets the brand blue be used exactly as specified, untouched.
 */
 
 :root {
 	/* Ground */
-	--ink: #0f1311;
-	--slate: #1a1f1c;
-	--stone: #252b27;
+	--ink: #161616;
+	--surface: #1e1e1e;
+	--hairline: #2a2a2a;
 
 	/* Accent */
-	--sage: #a8c09a;
-	--pale: #c6d6bc;
+	--brand: #4686c6;
+	--brand-bright: #6ba3d9;
 
 	/* Type */
-	--paper: #f4f6f3;
-	--ash: #8e9a92;
+	--paper: #ffffff;
+	--ash: #9a9a9a;
 
-	/* Bare triples, for the few places that genuinely need alpha */
-	--slate-rgb: 26, 31, 28;
-	--sage-rgb: 168, 192, 154;
-	--paper-rgb: 244, 246, 243;
+	/* Bare triples for the few places that genuinely need alpha */
+	--ink-rgb: 22, 22, 22;
+	--brand-rgb: 70, 134, 198;
 
 	/* Fluid type scale. clamp() means headlines shrink on small screens
 	   without a single media query. */
@@ -36,13 +42,19 @@
 	--step-2: clamp(1.6rem, 1.47rem + 0.67vw, 2rem);
 	--step-3: clamp(2.03rem, 1.79rem + 1.18vw, 2.66rem);
 	--step-4: clamp(2.57rem, 2.17rem + 2vw, 3.55rem);
-	--step-5: clamp(3.25rem, 2.6rem + 3.25vw, 4.74rem);
+	/*
+		Display size. The low end is deliberately small and the slope steep: a
+		long single word like "Unwrapped" has to fit a 375px screen at this size,
+		because headlines can't be hyphenated attractively. Full size is still
+		reached by ~1310px.
+	*/
+	--step-5: clamp(2.25rem, 1.3rem + 4.2vw, 4.74rem);
 
 	/* Rhythm */
 	--measure: 68ch;
 	--gutter: clamp(1.25rem, 4vw, 3rem);
-	--rule: 1px solid var(--stone);
-	--rule-sage: 1px solid var(--sage);
+	--wide: 1240px;
+	--rule: 1px solid var(--hairline);
 
 	/* Motion — referenced everywhere so the reduced-motion block can zero it out */
 	--ease: cubic-bezier(0.2, 0.6, 0.2, 1);
@@ -56,15 +68,15 @@
 }
 
 html {
-	background-color: var(--slate);
+	background-color: var(--ink);
 }
 
 body {
 	margin: 0;
 	padding: 0;
-	background-color: var(--slate);
+	background-color: var(--ink);
 	color: var(--paper);
-	font-family: var(--font-atkinson);
+	font-family: var(--font-body);
 	font-size: var(--step-0);
 	line-height: 1.65;
 	text-align: left;
@@ -76,7 +88,7 @@ body {
 
 main {
 	width: 100%;
-	max-width: 1180px;
+	max-width: var(--wide);
 	margin-inline: auto;
 	padding: clamp(2.5rem, 6vw, 5rem) var(--gutter);
 }
@@ -91,15 +103,19 @@ h5,
 h6 {
 	margin: 0 0 0.5rem 0;
 	color: var(--paper);
-	font-family: var(--font-archivo);
-	font-weight: 600;
-	letter-spacing: -0.022em;
-	line-height: 1.08;
+	font-family: var(--font-display);
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	line-height: 1.05;
 	text-wrap: balance;
-	/* body sets break-word to keep long URLs from overflowing prose.
-	   Headlines must never break mid-word. */
-	overflow-wrap: normal;
-	word-break: keep-all;
+	/*
+		A safety valve, not a preference. overflow-wrap only breaks a word that
+		genuinely cannot fit its container, so normal headlines are untouched —
+		but a long title like "Unwrapped" at display size on a 375px phone can no
+		longer push the whole page sideways.
+	*/
+	overflow-wrap: break-word;
+	word-break: normal;
 }
 
 h1 {
@@ -132,31 +148,36 @@ b {
 	color: var(--paper);
 }
 
+em,
+i {
+	font-style: italic;
+}
+
 a {
-	color: var(--sage);
-	text-decoration-color: rgba(var(--sage-rgb), 0.4);
+	color: var(--brand);
+	text-decoration-color: rgba(var(--brand-rgb), 0.45);
 	text-underline-offset: 0.2em;
 	text-decoration-thickness: 1px;
 	transition: color var(--dur) var(--ease);
 }
 
 a:hover {
-	color: var(--pale);
+	color: var(--brand-bright);
 	text-decoration-color: currentColor;
 }
 
-/* One focus treatment for the whole site. The template shipped with none. */
+/* One focus treatment for the whole site. */
 :focus-visible {
-	outline: 2px solid var(--sage);
+	outline: 2px solid var(--brand-bright);
 	outline-offset: 3px;
 	border-radius: 2px;
 }
 
-/* Uppercase small-caps used for dates, eyebrows, and contact-sheet edge marks. */
+/* Uppercase label used for dates, eyebrows, and metadata. */
 .eyebrow {
-	font-family: var(--font-archivo);
+	font-family: var(--font-body);
 	font-size: var(--step--1);
-	font-weight: 500;
+	font-weight: 700;
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	color: var(--ash);
@@ -177,31 +198,12 @@ hr {
 }
 
 blockquote {
-	border-left: 2px solid var(--sage);
+	border-left: 2px solid var(--brand);
 	padding: 0 0 0 1.25rem;
 	margin: 2rem 0;
 	font-size: var(--step-1);
 	line-height: 1.45;
 	color: var(--paper);
-}
-
-code {
-	padding: 0.15em 0.4em;
-	background-color: var(--stone);
-	border-radius: 3px;
-	font-size: 0.9em;
-	color: var(--pale);
-}
-
-pre {
-	padding: 1.25rem;
-	border: var(--rule);
-	border-radius: 4px;
-	overflow-x: auto;
-}
-
-pre > code {
-	all: unset;
 }
 
 table {
@@ -217,22 +219,10 @@ td {
 }
 
 th {
-	font-family: var(--font-archivo);
 	font-size: var(--step--1);
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
 	color: var(--ash);
-}
-
-textarea,
-input {
-	width: 100%;
-	font-size: 16px;
-	color: var(--paper);
-	background-color: var(--stone);
-	border: var(--rule);
-	border-radius: 3px;
-	padding: 0.6em 0.75em;
 }
 
 /* --- Motion ------------------------------------------------------------ */
@@ -277,12 +267,6 @@ input {
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
 	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }

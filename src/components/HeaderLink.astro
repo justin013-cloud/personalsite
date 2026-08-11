@@ -23,9 +23,9 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 		position: relative;
 		display: inline-block;
 		padding-block: 0.15em;
-		font-family: var(--font-archivo);
+		font-family: var(--font-body);
 		font-size: var(--step--1);
-		font-weight: 500;
+		font-weight: 700;
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
 		text-decoration: none;
@@ -41,7 +41,7 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 		color: var(--paper);
 	}
 
-	/* A sage rule held off the baseline, rather than a text underline. */
+	/* A brand rule held off the baseline, rather than a text underline. */
 	a.active::after {
 		content: '';
 		position: absolute;
@@ -49,6 +49,6 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 		right: 0;
 		bottom: -0.35em;
 		height: 1px;
-		background-color: var(--sage);
+		background-color: var(--brand);
 	}
 </style>

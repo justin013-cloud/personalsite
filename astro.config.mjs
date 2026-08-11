@@ -1,47 +1,35 @@
 // @ts-check
 
-import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
-	integrations: [mdx(), sitemap()],
+	site: 'https://justindsims.com',
+	integrations: [sitemap()],
 	fonts: [
 		{
-			// Display face: headlines, wordmark, and small-caps metadata.
-			// Astro downloads and self-hosts this at build time — no runtime
-			// request to Google, nothing to configure on Netlify.
+			// Display face — headlines, wordmark, section labels. Matches the
+			// bold gothic used on Justin's resume.
+			// Astro downloads and self-hosts this at build time, so there is no
+			// runtime request to Google and nothing to configure on Netlify.
 			provider: fontProviders.google(),
-			name: 'Archivo',
-			cssVariable: '--font-archivo',
-			fallbacks: ['system-ui', 'sans-serif'],
-			weights: [400, 500, 600, 700],
+			name: 'Science Gothic',
+			cssVariable: '--font-display',
+			fallbacks: ['Impact', 'system-ui', 'sans-serif'],
+			weights: [700],
 			styles: ['normal'],
 			subsets: ['latin'],
 		},
 		{
-			provider: fontProviders.local(),
-			name: 'Atkinson',
-			cssVariable: '--font-atkinson',
-			fallbacks: ['sans-serif'],
-			options: {
-				variants: [
-					{
-						src: ['./src/assets/fonts/atkinson-regular.woff'],
-						weight: 400,
-						style: 'normal',
-						display: 'swap',
-					},
-					{
-						src: ['./src/assets/fonts/atkinson-bold.woff'],
-						weight: 700,
-						style: 'normal',
-						display: 'swap',
-					},
-				],
-			},
+			// Body face — everything that isn't a headline.
+			provider: fontProviders.google(),
+			name: 'Roboto',
+			cssVariable: '--font-body',
+			fallbacks: ['system-ui', 'sans-serif'],
+			weights: [400, 700],
+			styles: ['normal', 'italic'],
+			subsets: ['latin'],
 		},
 	],
 });

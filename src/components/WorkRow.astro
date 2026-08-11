@@ -1,0 +1,196 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+import VimeoEmbed from './VimeoEmbed.astro';
+
+interface Props {
+	entry: CollectionEntry<'work'>;
+	/** Even rows put the video first, odd rows flip it. */
+	index: number;
+}
+
+const { entry, index } = Astro.props;
+const { title, brief, client, role, date, orientation, award, poster, vimeo } = entry.data;
+
+const href = `/work/${entry.id}/`;
+const isVertical = orientation === 'vertical';
+---
+
+<article class="row" data-flip={index % 2 === 1 ? '' : undefined} data-vertical={isVertical ? '' : undefined}>
+	<div class="media">
+		<VimeoEmbed url={vimeo} title={title} orientation={orientation} poster={poster} />
+	</div>
+
+	<div class="detail">
+		{award && <p class="award">{award}</p>}
+
+		<h3 class="title">
+			<a href={href}>{title}</a>
+		</h3>
+
+		<p class="meta">
+			{client}
+			{client && role && <span class="sep" aria-hidden="true">·</span>}
+			{role}
+		</p>
+
+		<p class="brief">{brief}</p>
+
+		<p class="foot">
+			<FormattedDate date={date} />
+			{isVertical && <span class="tag">Vertical</span>}
+		</p>
+
+		<a class="more" href={href}>
+			View project <span aria-hidden="true">&rarr;</span>
+		</a>
+	</div>
+</article>
+
+<style>
+	.row {
+		display: grid;
+		gap: clamp(1.25rem, 3vw, 2.5rem);
+		padding-block: clamp(2.5rem, 6vw, 4.5rem);
+		border-bottom: var(--rule);
+	}
+
+	/*
+		Stacked layout (phones): every row is one column, so a vertical video
+		would run the full width and tower over the page. It doesn't need to
+		match the width of the horizontal pieces — it needs to match their
+		visual weight. Above 48em the grid columns handle this instead.
+	*/
+	@media (max-width: 47.99em) {
+		.row[data-vertical] .media {
+			max-width: min(300px, 58vw);
+		}
+	}
+
+	/*
+		Below 48em everything stacks, so the alternating layout only exists where
+		there is room for two columns. Vertical videos get a narrower media column
+		so a 9:16 piece doesn't tower over the row.
+	*/
+	@media (min-width: 48em) {
+		.row {
+			grid-template-columns: 1.3fr 1fr;
+			align-items: center;
+			gap: clamp(2rem, 5vw, 4.5rem);
+		}
+
+		/*
+			A 9:16 video needs the narrow column or it towers over the row. Which
+			column is narrow depends on whether this row is flipped, so both cases
+			have to be stated — otherwise a flipped vertical lands in the wide
+			column and dwarfs everything.
+		*/
+		.row[data-vertical] {
+			grid-template-columns: 0.5fr 1fr;
+		}
+
+		.row[data-vertical][data-flip] {
+			grid-template-columns: 1fr 0.5fr;
+		}
+
+		/* The flip. Media moves to column two, detail to column one — order
+		   swaps visually without changing the DOM order, so the reading order
+		   stays title-after-video for screen readers. */
+		.row[data-flip] .media {
+			grid-column: 2;
+			grid-row: 1;
+		}
+
+		.row[data-flip] .detail {
+			grid-column: 1;
+			grid-row: 1;
+		}
+	}
+
+	.award {
+		margin: 0 0 0.75rem 0;
+		padding-left: 0.75rem;
+		border-left: 2px solid var(--brand);
+		font-size: var(--step--1);
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--brand);
+	}
+
+	.title {
+		margin: 0;
+		font-size: var(--step-3);
+		line-height: 1.02;
+	}
+
+	.title a {
+		color: var(--paper);
+		text-decoration: none;
+		transition: color var(--dur) var(--ease);
+	}
+
+	.title a:hover {
+		color: var(--brand);
+	}
+
+	.meta {
+		margin: 0.6rem 0 0 0;
+		font-size: var(--step--1);
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--ash);
+	}
+
+	.sep {
+		padding-inline: 0.4em;
+	}
+
+	.brief {
+		margin: 1.1rem 0 0 0;
+		max-width: 46ch;
+		color: var(--paper);
+		text-wrap: pretty;
+	}
+
+	.foot {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin: 1.1rem 0 0 0;
+		font-size: var(--step--1);
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--ash);
+	}
+
+	.tag {
+		padding: 0.15em 0.6em;
+		border: 1px solid var(--hairline);
+		border-radius: 999px;
+		font-weight: 700;
+		color: var(--brand);
+	}
+
+	.more {
+		display: inline-block;
+		margin-top: 1.5rem;
+		font-size: var(--step--1);
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		text-decoration: none;
+		color: var(--brand);
+		border-bottom: 1px solid rgba(var(--brand-rgb), 0.4);
+		padding-bottom: 0.3em;
+		transition:
+			color var(--dur) var(--ease),
+			border-color var(--dur) var(--ease);
+	}
+
+	.more:hover {
+		color: var(--brand-bright);
+		border-bottom-color: currentColor;
+	}
+</style>

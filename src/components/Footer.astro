@@ -1,5 +1,5 @@
 ---
-import { SITE_ROLE, SITE_TITLE } from '../consts';
+import { LINKS, SITE_ROLE, SITE_TITLE } from '../consts';
 
 const today = new Date();
 ---
@@ -11,11 +11,11 @@ const today = new Date();
 			<span class="eyebrow">{SITE_ROLE}</span>
 		</div>
 
-		<!--
-			The starter template pointed these at Astro's own accounts.
-			Removed. Add your own here when you're ready:
-			<a href="https://instagram.com/you">Instagram</a>
-		-->
+		<nav class="links" aria-label="Elsewhere">
+			<a href={LINKS.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
+			<a href={LINKS.vimeo} rel="me noopener" target="_blank">Vimeo</a>
+			<a href={`mailto:${LINKS.email}`}>Email</a>
+		</nav>
 
 		<p class="copyright">&copy; {today.getFullYear()} {SITE_TITLE}</p>
 	</div>
@@ -23,7 +23,7 @@ const today = new Date();
 
 <style>
 	footer {
-		background-color: var(--ink);
+		background-color: var(--surface);
 		border-top: var(--rule);
 	}
 
@@ -33,7 +33,7 @@ const today = new Date();
 		align-items: flex-end;
 		justify-content: space-between;
 		gap: 1.5rem;
-		max-width: 1180px;
+		max-width: var(--wide);
 		margin-inline: auto;
 		padding: clamp(2.5rem, 5vw, 4rem) var(--gutter);
 	}
@@ -45,11 +45,30 @@ const today = new Date();
 	}
 
 	.name {
-		font-family: var(--font-archivo);
-		font-size: var(--step-1);
+		font-family: var(--font-display);
+		font-size: var(--step-2);
 		font-weight: 700;
-		letter-spacing: -0.015em;
 		color: var(--paper);
+	}
+
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: clamp(1rem, 3vw, 2rem);
+	}
+
+	.links a {
+		font-size: var(--step--1);
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		text-decoration: none;
+		/*
+			The footer sits on --surface, not --ink. --brand is only 4.36:1 there,
+			which fails AA at this size; --brand-bright is 6.24:1. Any accent text
+			placed on --surface needs this treatment.
+		*/
+		color: var(--brand-bright);
 	}
 
 	.copyright {

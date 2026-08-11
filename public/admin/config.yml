@@ -1,0 +1,115 @@
+# Sveltia CMS — the editing UI at /admin/
+#
+# The fields below mirror the Zod schema in src/content.config.ts exactly. If you
+# add a field in one place, add it in the other, or the build will reject what
+# the CMS writes.
+
+backend:
+  name: github
+  repo: justin013-cloud/personalsite
+  branch: main
+  # One-click "Sign in with GitHub" needs a small OAuth proxy. Deploy the free
+  # Cloudflare Worker at https://github.com/sveltia/sveltia-cms-auth, then
+  # uncomment this and point it at your worker URL:
+  # base_url: https://YOUR-WORKER.workers.dev
+  #
+  # Until then, use the "Sign In with Token" option on the login screen, which
+  # needs no proxy at all.
+
+site_url: https://justindsims.com
+display_url: https://justindsims.com
+
+# Uploaded images land in src/assets so Astro can optimise them. public_folder is
+# relative because that is how Astro resolves image() paths in content files —
+# from src/content/work/*.md, ../../assets/uploads is src/assets/uploads.
+media_folder: src/assets/uploads
+public_folder: ../../assets/uploads
+
+collections:
+  - name: work
+    label: Work
+    label_singular: Project
+    description: One entry per video. Paste the Vimeo link and fill in the rest.
+    folder: src/content/work
+    create: true
+    slug: '{{slug}}'
+    summary: '{{title}}'
+    sortable_fields: [order, date, title]
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        hint: The project name, as you want it shown on the site.
+
+      - label: Vimeo URL
+        name: vimeo
+        widget: string
+        pattern:
+          ['^https?://(www\.)?vimeo\.com/(video/)?[0-9]+', 'Paste the whole Vimeo link, like https://vimeo.com/816579985']
+        hint: Copy the link straight from your browser's address bar.
+
+      - label: Orientation
+        name: orientation
+        widget: select
+        options: [horizontal, vertical]
+        default: horizontal
+        hint: Pick vertical for 9:16 social cuts. This changes how the video is framed.
+
+      - label: Client
+        name: client
+        widget: string
+        required: false
+        hint: Who it was made for.
+
+      - label: Your role
+        name: role
+        widget: string
+        required: false
+        hint: The title you held when you made it.
+
+      - label: Release date
+        name: date
+        widget: datetime
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
+
+      - label: Creative brief
+        name: brief
+        widget: text
+        hint: One or two sentences. Shows on the card and above the video.
+
+      - label: Award
+        name: award
+        widget: string
+        required: false
+        hint: 'Optional. For example: Gold Winner · Aster Awards 2024'
+
+      - label: Poster frame
+        name: poster
+        widget: image
+        required: false
+        hint: Optional. Leave empty and the Vimeo thumbnail is used automatically.
+
+      - label: Show on homepage
+        name: featured
+        widget: boolean
+        default: true
+
+      - label: Sort order
+        name: order
+        widget: number
+        value_type: int
+        default: 99
+        hint: Lower numbers appear first.
+
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        hint: Turn on to hide this from the live site.
+
+      - label: What I did
+        name: body
+        widget: markdown
+        hint: The long version — the approach, what you built, what you'd point at.
