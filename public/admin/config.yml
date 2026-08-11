@@ -147,6 +147,19 @@ collections:
         file: src/data/about.json
         description: Your bio, job history, awards, and skills.
         fields:
+          - label: Search description
+            name: metaDescription
+            widget: text
+            hint: Shown by Google and when this page is shared on LinkedIn. Not shown on the page itself.
+
+          - label: Page eyebrow
+            name: pageEyebrow
+            widget: string
+            hint: The small line above the "About" heading.
+          - label: Page heading
+            name: pageTitle
+            widget: string
+
           - label: Opening line
             name: profileLead
             widget: text
@@ -155,6 +168,22 @@ collections:
             name: profileBody
             widget: text
             hint: The paragraph under it.
+
+          - label: "Section heading: history"
+            name: historyHeading
+            widget: string
+          - label: "Section heading: awards"
+            name: awardsHeading
+            widget: string
+          - label: "Section heading: skills"
+            name: skillsHeading
+            widget: string
+          - label: "Section heading: education"
+            name: educationHeading
+            widget: string
+          - label: "Section heading: contact"
+            name: contactHeading
+            widget: string
 
           - label: Jobs
             name: jobs

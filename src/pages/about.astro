@@ -16,25 +16,38 @@ import { about } from '../lib/about';
 	References belong in a PDF sent on request.
 */
 
-const { profileLead, profileBody, jobs, awards, competencies, tools, education, contactPitch } =
-	about;
+const {
+	metaDescription,
+	pageEyebrow,
+	pageTitle,
+	profileLead,
+	profileBody,
+	historyHeading,
+	awardsHeading,
+	skillsHeading,
+	educationHeading,
+	contactHeading,
+	jobs,
+	awards,
+	competencies,
+	tools,
+	education,
+	contactPitch,
+} = about;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead
-			title="About"
-			description="Justin D. Sims is a video production professional with 10+ years bridging live-action cinematography and motion graphics."
-		/>
+		<BaseHead title={pageTitle} description={metaDescription} />
 	</head>
 	<body>
 		<Header />
 
 		<main>
 			<header class="page-title">
-				<p class="eyebrow">Who I am</p>
-				<h1>About</h1>
+				<p class="eyebrow">{pageEyebrow}</p>
+				<h1>{pageTitle}</h1>
 			</header>
 
 			<section class="profile">
@@ -43,7 +56,7 @@ const { profileLead, profileBody, jobs, awards, competencies, tools, education, 
 			</section>
 
 			<section aria-labelledby="history-heading">
-				<h2 id="history-heading" class="section-head">Professional history</h2>
+				<h2 id="history-heading" class="section-head">{historyHeading}</h2>
 				<ol class="history">
 					{
 						jobs.map((job) => (
@@ -70,7 +83,7 @@ const { profileLead, profileBody, jobs, awards, competencies, tools, education, 
 			</section>
 
 			<section aria-labelledby="awards-heading">
-				<h2 id="awards-heading" class="section-head">Awards &amp; recognition</h2>
+				<h2 id="awards-heading" class="section-head">{awardsHeading}</h2>
 				<ul class="awards">
 					{
 						awards.map((award) => (
@@ -87,7 +100,7 @@ const { profileLead, profileBody, jobs, awards, competencies, tools, education, 
 			</section>
 
 			<section aria-labelledby="skills-heading">
-				<h2 id="skills-heading" class="section-head">Capabilities &amp; tools</h2>
+				<h2 id="skills-heading" class="section-head">{skillsHeading}</h2>
 				<div class="skills">
 					<div>
 						<h3>Core competencies</h3>
@@ -105,7 +118,7 @@ const { profileLead, profileBody, jobs, awards, competencies, tools, education, 
 			</section>
 
 			<section aria-labelledby="education-heading">
-				<h2 id="education-heading" class="section-head">Education</h2>
+				<h2 id="education-heading" class="section-head">{educationHeading}</h2>
 				<p class="degree">{education.degree}</p>
 				<p class="school">
 					{education.school}{education.location && ` · ${education.location}`}
@@ -113,7 +126,7 @@ const { profileLead, profileBody, jobs, awards, competencies, tools, education, 
 			</section>
 
 			<section aria-labelledby="contact-heading" class="contact">
-				<h2 id="contact-heading" class="section-head">Get in touch</h2>
+				<h2 id="contact-heading" class="section-head">{contactHeading}</h2>
 				<p class="pitch">{contactPitch}</p>
 				<ul class="contact-links">
 					<li><a href={`mailto:${LINKS.email}`}>{LINKS.email}</a></li>

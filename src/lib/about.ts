@@ -9,8 +9,19 @@ import data from '../data/about.json';
  * the work collection gets from its own schema.
  */
 const schema = z.object({
+	metaDescription: z.string().min(1),
+
+	pageEyebrow: z.string().min(1),
+	pageTitle: z.string().min(1),
+
 	profileLead: z.string().min(1),
 	profileBody: z.string().min(1),
+
+	historyHeading: z.string().min(1),
+	awardsHeading: z.string().min(1),
+	skillsHeading: z.string().min(1),
+	educationHeading: z.string().min(1),
+	contactHeading: z.string().min(1),
 
 	jobs: z.array(
 		z.object({
