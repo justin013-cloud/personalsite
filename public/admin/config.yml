@@ -19,11 +19,14 @@ backend:
 site_url: https://justindsims.com
 display_url: https://justindsims.com
 
-# Uploaded images land in src/assets so Astro can optimise them. public_folder is
-# relative because that is how Astro resolves image() paths in content files —
-# from src/content/work/*.md, ../../assets/uploads is src/assets/uploads.
+# Uploaded images land in src/assets so Astro optimises them rather than serving
+# them at whatever size they were exported.
+#
+# public_folder must be an absolute path starting with "/" — Sveltia rejects a
+# relative one and refuses to load the whole config. Astro's image() helper
+# resolves this root-absolute form, so both are satisfied.
 media_folder: src/assets/uploads
-public_folder: ../../assets/uploads
+public_folder: /src/assets/uploads
 
 collections:
   - name: work
