@@ -19,6 +19,8 @@
 
 			    https://unpkg.com/@sveltia/cms@0.186.0/dist/sveltia-cms.js
 		-->
-		<script src="https://unpkg.com/@sveltia/cms@0.186.0/dist/sveltia-cms.js" type="module"></script>
+		<!-- No type="module": the bundle is a classic script, and marking it as a
+		     module makes Sveltia warn about unexpected behaviour. -->
+		<script src="https://unpkg.com/@sveltia/cms@0.186.0/dist/sveltia-cms.js"></script>
 	</body>
 </html>
