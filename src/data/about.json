@@ -1,0 +1,111 @@
+{
+  "metaDescription": "Justin D. Sims is a video production professional with 10+ years bridging live-action cinematography and motion graphics.",
+  "pageEyebrow": "Who I am",
+  "pageTitle": "About",
+  "historyHeading": "Professional history",
+  "awardsHeading": "Awards & recognition",
+  "skillsHeading": "Capabilities & tools",
+  "educationHeading": "Education",
+  "contactHeading": "Get in touch",
+  "profileLead": "Video production professional with 10+ years of experience bridging live action cinematography and motion graphics to craft cohesive, story-driven content.",
+  "profileBody": "Equally fluent on set and in post-production, combining both disciplines to build narratives that are visually compelling at every layer. Experienced leading creative production for agencies and in-house teams across advertising, B2B, and digital media, with a growing fluency in AI-assisted video tools that accelerate production without [TODO: the resume scan cut off here — finish this line in your own words].",
+  "jobs": [
+    {
+      "role": "Senior Video Production Specialist",
+      "company": "CSG Systems",
+      "note": "Acquired by NEC Corporation",
+      "period": "2024 – 2026",
+      "points": [
+        "Produce 50+ videos annually spanning motion graphics, AI-generated content, stock footage, voice-over, and music for trade shows, broadcast TV, social media, and web distribution.",
+        "Led an LED installation project, designing motion graphics for an immersive 8x8 foot cube display as part of a live internal broadcast presentation.",
+        "Partner cross-functionally to develop video strategies, campaign messaging, and branded content across B2B audiences."
+      ]
+    },
+    {
+      "role": "Video & Motion Director",
+      "company": "Boyden & Youngblutt",
+      "note": "",
+      "period": "2019 – 2024",
+      "points": [
+        "Directed end-to-end live action and motion graphics productions for advertising campaigns, applying cinematography, editing, dynamic typography, and visual design throughout each project.",
+        "Built and led a small creative team, managing workflows and mentoring junior talent from intern to full staff.",
+        "Collaborated with clients, internal staff, and vendors to deliver polished final projects for organizations ranging from startups to multinational corporations."
+      ]
+    },
+    {
+      "role": "Videographer & Animator",
+      "company": "Aptera Software",
+      "note": "Acquired by Core BTS",
+      "period": "2017 – 2018",
+      "points": [
+        "Developed, filmed, edited, and animated marketing videos showcasing custom software solutions across desktop, web, and mobile platforms.",
+        "Contributed to a full company rebrand including logo design, typography animation, visual identity systems, and brand messaging strategy."
+      ]
+    },
+    {
+      "role": "Digital Media Specialist",
+      "company": "LYFT Digital / Enspire Software / ENS Group",
+      "note": "Acquired by Corsica Technologies",
+      "period": "2013 – 2016",
+      "points": [
+        "Created and produced branding videos for multiple companies and subsidiaries, managing end-to-end creative production from concept through final delivery.",
+        "Preserved distinct brand identities across clients using brand voice, typography, iconography, and color theory in both live action and motion graphics projects."
+      ]
+    },
+    {
+      "role": "Technical Director / Graphics & Audio",
+      "company": "WFFT Local / Fox55",
+      "note": "",
+      "period": "2011 – 2013",
+      "points": [
+        "Directed and operated a live video switcher simultaneously during broadcast newscasts, demonstrating real-time decision-making and leadership.",
+        "Designed on-air graphics to enhance broadcast visual quality and produced promotional ads and reels using corporate brand standards."
+      ]
+    }
+  ],
+  "awards": [
+    { "honor": "Gold Winner", "body": "Aster Awards", "year": "2024", "work": "Exactech, Inc. Brand Anthem Video" },
+    { "honor": "Silver Winner", "body": "Aster Awards", "year": "2024", "work": "Exactech, Inc. Exactly Brand Campaign" },
+    { "honor": "Silver Winner", "body": "The Telly Awards", "year": "2020", "work": "Zimmer Biomet Connect" },
+    { "honor": "Merit", "body": "Healthcare Advertising Awards", "year": "2020", "work": "Zimmer Biomet Connect" },
+    { "honor": "Best Hoosier Film", "body": "Hobnobben Film Festival", "year": "2018", "work": "Knock. Knock. Knock." },
+    { "honor": "Gold Ad Honor", "body": "American Advertising Federation of Fort Wayne", "year": "2016", "work": "SmartSource from ENS Group" },
+    { "honor": "Gold Winner", "body": "American Advertising Federation of Fort Wayne", "year": "2016", "work": "So You Want to Work for Enspire?" }
+  ],
+  "competencies": [
+    "Motion Graphics",
+    "Video Editing",
+    "Cinematography",
+    "Lighting",
+    "Color Grading",
+    "Visual Storytelling",
+    "Brand Identity",
+    "Typography",
+    "Storyboarding",
+    "Scriptwriting",
+    "Directing",
+    "Producing",
+    "Creative Concept Development",
+    "Project Management",
+    "Team Management"
+  ],
+  "tools": [
+    "Adobe Creative Cloud",
+    "After Effects",
+    "Premiere Pro",
+    "Audition",
+    "Illustrator",
+    "Photoshop",
+    "Firefly",
+    "Google Veo 3",
+    "ElevenLabs",
+    "ChatGPT",
+    "Claude"
+  ],
+  "education": {
+    "degree": "B.A. Computer Art — 3-D Computer Animation",
+    "school": "University of Saint Francis, School of Creative Arts",
+    "location": "Fort Wayne, IN"
+  },
+  "contactPitch": "Available for freelance and full-time work."
+}

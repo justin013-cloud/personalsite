@@ -3,128 +3,63 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { LINKS } from '../consts';
+import { about } from '../lib/about';
 
 /*
-	Content here comes from Justin's resume. Two things from that document are
-	deliberately left off: his mobile number, and the four professional
-	references. Those reference entries carry other people's personal phone
-	numbers and private email addresses — publishing them exposes people who
-	never agreed to it, and scrapers harvest them within days. References belong
-	in a PDF sent on request.
+	Everything on this page is edited in the CMS under Pages → About, and lives
+	in src/data/about.json. Adding a job is adding an entry there — no code.
+
+	Two things from Justin's resume are deliberately absent and should stay
+	that way: his mobile number, and the four professional references. Those
+	reference entries carry other people's personal phone numbers and private
+	email addresses, and publishing them exposes people who never agreed to it.
+	References belong in a PDF sent on request.
 */
 
-const history = [
-	{
-		role: 'Senior Video Production Specialist',
-		company: 'CSG Systems',
-		note: 'Acquired by NEC Corporation',
-		period: '2024 – 2026',
-		points: [
-			'Produce 50+ videos annually spanning motion graphics, AI-generated content, stock footage, voice-over, and music for trade shows, broadcast TV, social media, and web distribution.',
-			'Led an LED installation project, designing motion graphics for an immersive 8x8 foot cube display as part of a live internal broadcast presentation.',
-			'Partner cross-functionally to develop video strategies, campaign messaging, and branded content across B2B audiences.',
-		],
-	},
-	{
-		role: 'Video & Motion Director',
-		company: 'Boyden & Youngblutt',
-		period: '2019 – 2024',
-		points: [
-			'Directed end-to-end live action and motion graphics productions for advertising campaigns, applying cinematography, editing, dynamic typography, and visual design throughout each project.',
-			'Built and led a small creative team, managing workflows and mentoring junior talent from intern to full staff.',
-			'Collaborated with clients, internal staff, and vendors to deliver polished final projects for organizations ranging from startups to multinational corporations.',
-		],
-	},
-	{
-		role: 'Videographer & Animator',
-		company: 'Aptera Software',
-		note: 'Acquired by Core BTS',
-		period: '2017 – 2018',
-		points: [
-			'Developed, filmed, edited, and animated marketing videos showcasing custom software solutions across desktop, web, and mobile platforms.',
-			'Contributed to a full company rebrand including logo design, typography animation, visual identity systems, and brand messaging strategy.',
-		],
-	},
-	{
-		role: 'Digital Media Specialist',
-		company: 'LYFT Digital / Enspire Software / ENS Group',
-		note: 'Acquired by Corsica Technologies',
-		period: '2013 – 2016',
-		points: [
-			'Created and produced branding videos for multiple companies and subsidiaries, managing end-to-end creative production from concept through final delivery.',
-			'Preserved distinct brand identities across clients using brand voice, typography, iconography, and color theory in both live action and motion graphics projects.',
-		],
-	},
-	{
-		role: 'Technical Director / Graphics & Audio',
-		company: 'WFFT Local / Fox55',
-		period: '2011 – 2013',
-		points: [
-			'Directed and operated a live video switcher simultaneously during broadcast newscasts, demonstrating real-time decision-making and leadership.',
-			'Designed on-air graphics to enhance broadcast visual quality and produced promotional ads and reels using corporate brand standards.',
-		],
-	},
-];
-
-const awards = [
-	{ honor: 'Gold Winner', body: 'Aster Awards', year: '2024', work: 'Exactech, Inc. Brand Anthem Video' },
-	{ honor: 'Silver Winner', body: 'Aster Awards', year: '2024', work: 'Exactech, Inc. Exactly Brand Campaign' },
-	{ honor: 'Silver Winner', body: 'The Telly Awards', year: '2020', work: 'Zimmer Biomet Connect' },
-	{ honor: 'Merit', body: 'Healthcare Advertising Awards', year: '2020', work: 'Zimmer Biomet Connect' },
-	{ honor: 'Best Hoosier Film', body: 'Hobnobben Film Festival', year: '2018', work: 'Knock. Knock. Knock.' },
-	{ honor: 'Gold Ad Honor', body: 'American Advertising Federation of Fort Wayne', year: '2016', work: 'SmartSource from ENS Group' },
-	{ honor: 'Gold Winner', body: 'American Advertising Federation of Fort Wayne', year: '2016', work: 'So You Want to Work for Enspire?' },
-];
-
-const competencies = [
-	'Motion Graphics', 'Video Editing', 'Cinematography', 'Lighting', 'Color Grading',
-	'Visual Storytelling', 'Brand Identity', 'Typography', 'Storyboarding', 'Scriptwriting',
-	'Directing', 'Producing', 'Creative Concept Development', 'Project Management', 'Team Management',
-];
-
-const tools = [
-	'After Effects', 'Premiere Pro', 'Audition', 'Illustrator', 'Photoshop',
-	'Firefly', 'Google Veo 3', 'ElevenLabs', 'ChatGPT', 'Claude',
-];
+const {
+	metaDescription,
+	pageEyebrow,
+	pageTitle,
+	profileLead,
+	profileBody,
+	historyHeading,
+	awardsHeading,
+	skillsHeading,
+	educationHeading,
+	contactHeading,
+	jobs,
+	awards,
+	competencies,
+	tools,
+	education,
+	contactPitch,
+} = about;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead
-			title="About"
-			description="Justin D. Sims is a video production professional with 10+ years bridging live-action cinematography and motion graphics."
-		/>
+		<BaseHead title={pageTitle} description={metaDescription} />
 	</head>
 	<body>
 		<Header />
 
 		<main>
 			<header class="page-title">
-				<p class="eyebrow">Who I am</p>
-				<h1>About</h1>
+				<p class="eyebrow">{pageEyebrow}</p>
+				<h1>{pageTitle}</h1>
 			</header>
 
 			<section class="profile">
-				<p class="lead">
-					Video production professional with 10+ years of experience bridging live action
-					cinematography and motion graphics to craft cohesive, story-driven content.
-				</p>
-				<p>
-					Equally fluent on set and in post-production, combining both disciplines to build
-					narratives that are visually compelling at every layer. Experienced leading creative
-					production for agencies and in-house teams across advertising, B2B, and digital media,
-					with a growing fluency in AI-assisted video tools that accelerate production without{' '}
-					<!-- TODO: the resume scan cuts off here. Finish this sentence in your own words. -->
-					<em>[finish this line]</em>.
-				</p>
+				<p class="lead">{profileLead}</p>
+				<p>{profileBody}</p>
 			</section>
 
 			<section aria-labelledby="history-heading">
-				<h2 id="history-heading" class="section-head">Professional history</h2>
+				<h2 id="history-heading" class="section-head">{historyHeading}</h2>
 				<ol class="history">
 					{
-						history.map((job) => (
+						jobs.map((job) => (
 							<li>
 								<div class="when">
 									<span class="period">{job.period}</span>
@@ -148,7 +83,7 @@ const tools = [
 			</section>
 
 			<section aria-labelledby="awards-heading">
-				<h2 id="awards-heading" class="section-head">Awards &amp; recognition</h2>
+				<h2 id="awards-heading" class="section-head">{awardsHeading}</h2>
 				<ul class="awards">
 					{
 						awards.map((award) => (
@@ -165,7 +100,7 @@ const tools = [
 			</section>
 
 			<section aria-labelledby="skills-heading">
-				<h2 id="skills-heading" class="section-head">Capabilities &amp; tools</h2>
+				<h2 id="skills-heading" class="section-head">{skillsHeading}</h2>
 				<div class="skills">
 					<div>
 						<h3>Core competencies</h3>
@@ -176,7 +111,6 @@ const tools = [
 					<div>
 						<h3>Tools &amp; software</h3>
 						<ul class="tags">
-							<li>Adobe Creative Cloud</li>
 							{tools.map((item) => <li>{item}</li>)}
 						</ul>
 					</div>
@@ -184,14 +118,16 @@ const tools = [
 			</section>
 
 			<section aria-labelledby="education-heading">
-				<h2 id="education-heading" class="section-head">Education</h2>
-				<p class="degree">B.A. Computer Art — 3-D Computer Animation</p>
-				<p class="school">University of Saint Francis, School of Creative Arts · Fort Wayne, IN</p>
+				<h2 id="education-heading" class="section-head">{educationHeading}</h2>
+				<p class="degree">{education.degree}</p>
+				<p class="school">
+					{education.school}{education.location && ` · ${education.location}`}
+				</p>
 			</section>
 
 			<section aria-labelledby="contact-heading" class="contact">
-				<h2 id="contact-heading" class="section-head">Get in touch</h2>
-				<p class="pitch">Available for freelance and full-time work.</p>
+				<h2 id="contact-heading" class="section-head">{contactHeading}</h2>
+				<p class="pitch">{contactPitch}</p>
 				<ul class="contact-links">
 					<li><a href={`mailto:${LINKS.email}`}>{LINKS.email}</a></li>
 					<li><a href={LINKS.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>

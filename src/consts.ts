@@ -1,19 +1,24 @@
-// Site-wide values. Edit these here and they update everywhere.
+// These used to be hardcoded here. They now come from src/data/site.json so
+// they can be edited in the CMS under Settings → Site & contact.
+//
+// The named exports are kept so components import from one predictable place;
+// changing a value means editing the JSON (or the CMS), not this file.
 
-export const SITE_TITLE = 'Justin D. Sims';
-export const SITE_DESCRIPTION =
-	'Motion graphics, video editing, and storytelling. Ten years bridging live-action cinematography and motion design.';
+import { site } from './lib/site';
+
+export const SITE_TITLE = site.title;
+export const SITE_DESCRIPTION = site.description;
 
 /** Sits under the name in the header and footer. */
-export const SITE_ROLE = 'Motion Graphics · Video Editing · Storytelling';
+export const SITE_ROLE = site.role;
 
-/** The reel at the top of the homepage. Swap this URL when a newer one exists. */
-export const SHOWREEL = 'https://vimeo.com/816579985';
-export const SHOWREEL_LABEL = '2023 Showreel';
+/** The reel at the top of the homepage. */
+export const SHOWREEL = site.showreelUrl;
+export const SHOWREEL_LABEL = site.showreelLabel;
 
 /** Used by the footer and the about page, so they can never drift apart. */
 export const LINKS = {
-	linkedin: 'https://www.linkedin.com/in/justindsims/',
-	vimeo: 'https://vimeo.com/justindsims',
-	email: 'justin.d.sims@gmail.com',
+	linkedin: site.linkedin,
+	vimeo: site.vimeo,
+	email: site.email,
 };
