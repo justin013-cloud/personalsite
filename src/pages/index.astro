@@ -6,6 +6,7 @@ import Header from '../components/Header.astro';
 import VimeoEmbed from '../components/VimeoEmbed.astro';
 import WorkRow from '../components/WorkRow.astro';
 import { SHOWREEL, SHOWREEL_LABEL, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { home } from '../lib/home';
 
 const featured = (await getCollection('work', ({ data }) => !data.draft && data.featured)).sort(
 	(a, b) => a.data.order - b.data.order || b.data.date.valueOf() - a.data.date.valueOf(),
@@ -29,12 +30,9 @@ const total = (await getCollection('work', ({ data }) => !data.draft)).length;
 			-->
 			<section class="hero">
 				<div class="intro">
-					<p class="eyebrow" data-rise style="--i: 0">Motion Graphics · Video Editing · Storytelling</p>
-					<h1 data-rise style="--i: 1">Justin D. Sims</h1>
-					<p class="lede" data-rise style="--i: 2">
-						Ten years bridging live-action cinematography and motion design — equally at home on
-						set and in post.
-					</p>
+					<p class="eyebrow" data-rise style="--i: 0">{home.eyebrow}</p>
+					<h1 data-rise style="--i: 1">{home.headline}</h1>
+					<p class="lede" data-rise style="--i: 2">{home.lede}</p>
 				</div>
 
 				<div class="reel" data-rise style="--i: 3">
@@ -44,7 +42,7 @@ const total = (await getCollection('work', ({ data }) => !data.draft)).length;
 
 			<section id="work" aria-labelledby="work-heading">
 				<div class="section-head">
-					<h2 id="work-heading">Selected work</h2>
+					<h2 id="work-heading">{home.workHeading}</h2>
 					{featured.length < total && <a class="all" href="/work">All work</a>}
 				</div>
 

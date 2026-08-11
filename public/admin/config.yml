@@ -116,3 +116,175 @@ collections:
         name: body
         widget: markdown
         hint: The long version — the approach, what you built, what you'd point at.
+
+  # Single pages. Unlike Work, these are specific files rather than a folder you
+  # add to — so they're edited, never created or deleted.
+  - name: pages
+    label: Pages
+    files:
+      - name: home
+        label: Homepage
+        file: src/data/home.json
+        description: The text at the top of the homepage, above the reel.
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+            hint: The small uppercase line above your name.
+          - label: Headline
+            name: headline
+            widget: string
+          - label: Intro line
+            name: lede
+            widget: text
+            hint: Keep this to two lines — anything longer pushes the reel off the screen.
+          - label: Work section heading
+            name: workHeading
+            widget: string
+
+      - name: about
+        label: About page
+        file: src/data/about.json
+        description: Your bio, job history, awards, and skills.
+        fields:
+          - label: Opening line
+            name: profileLead
+            widget: text
+            hint: The large line at the top. One or two sentences.
+          - label: Profile
+            name: profileBody
+            widget: text
+            hint: The paragraph under it.
+
+          - label: Jobs
+            name: jobs
+            widget: list
+            label_singular: Job
+            summary: '{{fields.role}} — {{fields.company}}'
+            collapsed: true
+            hint: Newest first. Drag to reorder.
+            fields:
+              - label: Job title
+                name: role
+                widget: string
+              - label: Company
+                name: company
+                widget: string
+              - label: Note
+                name: note
+                widget: string
+                required: false
+                hint: 'Optional, shown in brackets. For example: Acquired by NEC Corporation'
+              - label: Dates
+                name: period
+                widget: string
+                hint: 'Free text — for example: 2024 – 2026, or 2019 – Present'
+              - label: What you did
+                name: points
+                widget: list
+                label_singular: Bullet
+                field:
+                  label: Bullet
+                  name: point
+                  widget: text
+
+          - label: Awards
+            name: awards
+            widget: list
+            label_singular: Award
+            summary: '{{fields.honor}} — {{fields.body}} {{fields.year}}'
+            collapsed: true
+            fields:
+              - label: Honor
+                name: honor
+                widget: string
+                hint: 'For example: Gold Winner'
+              - label: Awarding body
+                name: body
+                widget: string
+              - label: Year
+                name: year
+                widget: string
+              - label: For which project
+                name: work
+                widget: string
+                required: false
+
+          - label: Core competencies
+            name: competencies
+            widget: list
+            label_singular: Competency
+            collapsed: true
+            field:
+              label: Competency
+              name: item
+              widget: string
+
+          - label: Tools & software
+            name: tools
+            widget: list
+            label_singular: Tool
+            collapsed: true
+            field:
+              label: Tool
+              name: item
+              widget: string
+
+          - label: Education
+            name: education
+            widget: object
+            fields:
+              - label: Degree
+                name: degree
+                widget: string
+              - label: School
+                name: school
+                widget: string
+              - label: Location
+                name: location
+                widget: string
+                required: false
+
+          - label: Contact line
+            name: contactPitch
+            widget: string
+            hint: The line above your contact links.
+
+  - name: settings
+    label: Settings
+    files:
+      - name: site
+        label: Site & contact
+        file: src/data/site.json
+        description: Your name, the showreel, and where people reach you.
+        fields:
+          - label: Site title
+            name: title
+            widget: string
+          - label: Site description
+            name: description
+            widget: text
+            hint: Used by Google and shown when the site is shared on LinkedIn.
+          - label: Role line
+            name: role
+            widget: string
+            hint: Appears under your name in the footer.
+          - label: Showreel URL
+            name: showreelUrl
+            widget: string
+            pattern:
+              ['^https?://(www\.)?vimeo\.com/(video/)?[0-9]+', 'Paste the whole Vimeo link']
+            hint: The reel at the top of the homepage. Paste a new link to swap it.
+          - label: Showreel label
+            name: showreelLabel
+            widget: string
+            hint: 'For example: 2026 Showreel'
+          - label: Email
+            name: email
+            widget: string
+          - label: LinkedIn URL
+            name: linkedin
+            widget: string
+          - label: Vimeo URL
+            name: vimeo
+            widget: string

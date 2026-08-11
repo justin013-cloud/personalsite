@@ -7,13 +7,44 @@ the repo. Pushing to `main` publishes automatically through Netlify.
 
 ---
 
-## Adding a project (no code)
+## Signing in to the editor
 
-Go to **[justindsims.com/admin/](https://justindsims.com/admin/)** and sign in
-with GitHub. You'll get a normal editing screen — click **Work → New Project**,
-fill in the fields, and hit publish. The site rebuilds itself in about a minute.
+Go to **[justindsims.com/admin/](https://justindsims.com/admin/)**. You don't
+need to install anything — it's a web page, and it works on a tablet.
 
-You don't need to install anything. It's a web page, and it works on a tablet.
+Until the OAuth proxy is set up, use **Sign In Using Access Token**. To make a
+token, once:
+
+1. **github.com → Settings → Developer settings → Personal access tokens →
+   Fine-grained tokens → Generate new token**
+2. **Name:** `justindsims.com CMS` · **Expiration:** 1 year
+3. **Resource owner:** `justin013-cloud` · **Repository access:** *Only select
+   repositories* → `personalsite`
+4. **Repository permissions →** set **Contents** to **Read and write**
+   (Metadata: Read-only is added automatically)
+5. Generate, copy it, and paste it into the sign-in screen
+
+Treat that token like a password — never paste it into email or chat. It's
+stored in that browser on that device, so you'll do this once per device.
+
+**It expires.** When it does the editor stops working with an unhelpful auth
+error rather than "your token expired," so put a reminder in your calendar.
+
+## What you can edit
+
+| Section | What's in it |
+| --- | --- |
+| **Work** | One entry per video. Add, edit, reorder, delete. |
+| **Pages → Homepage** | The text above the reel. |
+| **Pages → About** | Bio, job history, awards, skills, education. |
+| **Settings → Site & contact** | Showreel URL, email, LinkedIn, Vimeo. |
+
+Click **Work → New Project** to add a video, fill in the fields, hit publish.
+The site rebuilds itself in about a minute.
+
+**Adding a job to your résumé:** Pages → About → **Jobs** → *Add Job*. Dates are
+free text, so write them however you like — `2024 – 2026`, `2019 – Present`.
+Drag jobs to reorder them.
 
 The only field that has to be exact is **Vimeo URL** — copy the link straight
 from your browser's address bar, like `https://vimeo.com/816579985`. Everything
@@ -60,10 +91,13 @@ and which field. It won't publish something broken.
 
 | What | Where |
 | --- | --- |
-| Showreel at the top of the homepage | `SHOWREEL` in `src/consts.ts` |
-| Email, LinkedIn, Vimeo links | `LINKS` in `src/consts.ts` |
-| Bio, job history, awards, tools | `src/pages/about.astro` |
+| Showreel, email, LinkedIn, Vimeo | `src/data/site.json` |
+| Homepage hero text | `src/data/home.json` |
+| Bio, job history, awards, tools | `src/data/about.json` |
 | Colours and type sizes | `src/styles/global.css` |
+
+The first three are the same files the CMS writes to, so editing either way
+works and neither overwrites the other.
 
 ---
 
@@ -80,9 +114,14 @@ swaps in the Vimeo player on click. Fonts (Science Gothic, Roboto) are
 self-hosted at build time via Astro's font provider — no runtime request to
 Google.
 
-**Content model:** one collection, `work`, defined in `src/content.config.ts`.
-The Zod schema is the source of truth; `public/admin/config.yml` mirrors it for
-the CMS. **Change one and you must change the other.**
+**Content model:** the `work` collection in `src/content.config.ts`, plus three
+JSON files in `src/data/` validated by matching Zod schemas in `src/lib/`
+(`about.ts`, `home.ts`, `site.ts`). Every one of them is mirrored by a
+collection in `public/admin/config.yml`. **Change a schema and you must change
+the CMS config to match**, or the editor will write data the build rejects.
+
+Page *content* lives in `src/data/`; page *layout* stays in `.astro`. That line
+is deliberate — Justin edits what the page says, not how it's built.
 
 **Video embeds** use a facade — poster image plus a play button, with the iframe
 injected on click. Five live Vimeo iframes on one page is several megabytes, and
