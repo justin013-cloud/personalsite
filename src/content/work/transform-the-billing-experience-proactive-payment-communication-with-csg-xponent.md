@@ -1,5 +1,5 @@
 ---
-title: Transform the Billing Experience | Proactive Payment Communication with CSG Xponent
+title: Transform the Billing Experience
 vimeo: https://vimeo.com/1080353349
 orientation: horizontal
 client: CSG Systems
