@@ -3,6 +3,14 @@ import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
 
+<!--
+	First focusable thing on every page. Without it, anyone navigating by
+	keyboard or screen reader tabs through the wordmark and all three nav links
+	before reaching the content — on every single page. WCAG 2.4.1, Level A.
+	It's invisible until focused.
+-->
+<a class="skip" href="#main">Skip to content</a>
+
 <header>
 	<nav>
 		<a class="wordmark" href="/">{SITE_TITLE}</a>
@@ -15,6 +23,27 @@ import HeaderLink from './HeaderLink.astro';
 </header>
 
 <style>
+	.skip {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 20;
+		/* Off-canvas rather than display:none, so it stays in the tab order. */
+		transform: translateY(-120%);
+		padding: 0.75rem 1.25rem;
+		background-color: var(--brand);
+		color: var(--ink);
+		font-weight: 700;
+		text-decoration: none;
+		transition: transform var(--dur) var(--ease);
+	}
+
+	/* :focus, not :focus-visible — this link is only reachable by keyboard
+	   anyway, and :focus covers programmatic focus from assistive tech too. */
+	.skip:focus {
+		transform: translateY(0);
+	}
+
 	header {
 		position: sticky;
 		top: 0;

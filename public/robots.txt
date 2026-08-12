@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# The editor. It's already marked noindex, but there's no reason for it to be
+# crawled at all — and no reason for "Justin D. Sims content manager" to be a
+# search result a hiring manager can find.
+Disallow: /admin/
+
+Sitemap: https://justindsims.com/sitemap-index.xml

@@ -21,13 +21,13 @@ const projects = (await getCollection('work', ({ data }) => !data.draft)).sort(
 	<body>
 		<Header />
 
-		<main>
+		<main id="main">
 			<header class="page-title">
 				<p class="eyebrow">Portfolio</p>
 				<h1>Work</h1>
 			</header>
 
-			{projects.map((entry, i) => <WorkRow entry={entry} index={i} />)}
+			{projects.map((entry, i) => <WorkRow entry={entry} index={i} headingLevel={2} />)}
 		</main>
 
 		<Footer />
