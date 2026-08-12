@@ -1,14 +1,14 @@
 {
   "metaDescription": "Justin D. Sims is a video production professional with 10+ years bridging live-action cinematography and motion graphics.",
   "pageEyebrow": "Who I am",
-  "pageTitle": "About",
+  "pageTitle": "About Me",
+  "profileLead": "Video production professional with 10+ years of experience bridging live action cinematography and motion graphics to craft cohesive, story-driven content.",
+  "profileBody": "Equally fluent on set and in post-production, combining both disciplines to build narratives that are visually compelling at every layer. Experienced leading creative production for agencies and in-house teams across advertising, B2B, and digital media, with a growing fluency in AI-assisted video tools that accelerate production without [TODO: the resume scan cut off here — finish this line in your own words].",
   "historyHeading": "Professional history",
   "awardsHeading": "Awards & recognition",
   "skillsHeading": "Capabilities & tools",
   "educationHeading": "Education",
   "contactHeading": "Get in touch",
-  "profileLead": "Video production professional with 10+ years of experience bridging live action cinematography and motion graphics to craft cohesive, story-driven content.",
-  "profileBody": "Equally fluent on set and in post-production, combining both disciplines to build narratives that are visually compelling at every layer. Experienced leading creative production for agencies and in-house teams across advertising, B2B, and digital media, with a growing fluency in AI-assisted video tools that accelerate production without [TODO: the resume scan cut off here — finish this line in your own words].",
   "jobs": [
     {
       "role": "Senior Video Production Specialist",
@@ -64,13 +64,48 @@
     }
   ],
   "awards": [
-    { "honor": "Gold Winner", "body": "Aster Awards", "year": "2024", "work": "Exactech, Inc. Brand Anthem Video" },
-    { "honor": "Silver Winner", "body": "Aster Awards", "year": "2024", "work": "Exactech, Inc. Exactly Brand Campaign" },
-    { "honor": "Silver Winner", "body": "The Telly Awards", "year": "2020", "work": "Zimmer Biomet Connect" },
-    { "honor": "Merit", "body": "Healthcare Advertising Awards", "year": "2020", "work": "Zimmer Biomet Connect" },
-    { "honor": "Best Hoosier Film", "body": "Hobnobben Film Festival", "year": "2018", "work": "Knock. Knock. Knock." },
-    { "honor": "Gold Ad Honor", "body": "American Advertising Federation of Fort Wayne", "year": "2016", "work": "SmartSource from ENS Group" },
-    { "honor": "Gold Winner", "body": "American Advertising Federation of Fort Wayne", "year": "2016", "work": "So You Want to Work for Enspire?" }
+    {
+      "honor": "Gold Winner",
+      "body": "Aster Awards",
+      "year": "2024",
+      "work": "Exactech, Inc. Brand Anthem Video"
+    },
+    {
+      "honor": "Silver Winner",
+      "body": "Aster Awards",
+      "year": "2024",
+      "work": "Exactech, Inc. Exactly Brand Campaign"
+    },
+    {
+      "honor": "Silver Winner",
+      "body": "The Telly Awards",
+      "year": "2020",
+      "work": "Zimmer Biomet Connect"
+    },
+    {
+      "honor": "Merit",
+      "body": "Healthcare Advertising Awards",
+      "year": "2020",
+      "work": "Zimmer Biomet Connect"
+    },
+    {
+      "honor": "Best Hoosier Film",
+      "body": "Hobnobben Film Festival",
+      "year": "2018",
+      "work": "Knock. Knock. Knock."
+    },
+    {
+      "honor": "Gold Ad Honor",
+      "body": "American Advertising Federation of Fort Wayne",
+      "year": "2016",
+      "work": "SmartSource from ENS Group"
+    },
+    {
+      "honor": "Gold Winner",
+      "body": "American Advertising Federation of Fort Wayne",
+      "year": "2016",
+      "work": "So You Want to Work for Enspire?"
+    }
   ],
   "competencies": [
     "Motion Graphics",
