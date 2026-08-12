@@ -4,3 +4,24 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# Sensible defaults, not a lockdown. Deliberately no Content-Security-Policy:
+# the site embeds the Vimeo player and /admin/ loads Sveltia from unpkg, so a
+# CSP would need to allow both — worth adding later, but a wrong one silently
+# breaks video playback and the editor, which is a bad trade right now.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Send the full URL to our own pages, only the origin to other sites.
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Stop browsers guessing a file is something other than what we served.
+    X-Content-Type-Options = "nosniff"
+    # Nothing here needs framing, and nothing here needs these devices.
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+
+# Hashed filenames never change contents, so they can be cached forever.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

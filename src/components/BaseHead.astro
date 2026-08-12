@@ -3,6 +3,8 @@
 import '../styles/global.css';
 import { Font } from 'astro:assets';
 import { SITE_TITLE } from '../consts';
+import { site } from '../lib/site';
+import { vimeoPoster } from '../lib/vimeo';
 
 interface Props {
 	title: string;
@@ -19,7 +21,19 @@ const { title, description, image, type = 'website' } = Astro.props;
 
 // Page titles read "Work — Justin D. Sims", except the homepage which is just the name.
 const pageTitle = title === SITE_TITLE ? title : `${title} — ${SITE_TITLE}`;
-const socialImage = image ? new URL(image, Astro.url).href : undefined;
+
+/*
+	Social card. Work pages pass their own still; everything else falls back to
+	an uploaded image, and failing that to the showreel's Vimeo thumbnail —
+	which is already a branded title card with his name on it.
+
+	Without a fallback, sharing justindsims.com on LinkedIn renders as a bare
+	text link with no picture, which is the single most likely way this site
+	gets shared during a job hunt.
+*/
+const fallback = site.socialImage || (await vimeoPoster(site.showreelUrl)) || null;
+const chosen = image ?? fallback;
+const socialImage = chosen ? new URL(chosen, Astro.url).href : undefined;
 ---
 
 <!-- Global metadata -->
@@ -29,6 +43,9 @@ const socialImage = image ? new URL(image, Astro.url).href : undefined;
 <link rel="icon" href="/favicon.ico" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <meta name="generator" content={Astro.generator} />
+
+<!-- Tints the browser chrome on mobile to match the page ground. -->
+<meta name="theme-color" content="#161616" />
 
 <!-- One <Font> per family, or its @font-face is never emitted. -->
 <Font cssVariable="--font-display" preload />

@@ -7,18 +7,35 @@ import VimeoEmbed from '../components/VimeoEmbed.astro';
 import WorkRow from '../components/WorkRow.astro';
 import { SHOWREEL, SHOWREEL_LABEL, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { home } from '../lib/home';
+import { site } from '../lib/site';
 
 const featured = (await getCollection('work', ({ data }) => !data.draft && data.featured)).sort(
 	(a, b) => a.data.order - b.data.order || b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
 const total = (await getCollection('work', ({ data }) => !data.draft)).length;
+
+/*
+	Tells search engines this site is a person, not a company — and which
+	person, tied to his LinkedIn and Vimeo. Without it they have to infer all
+	of that from page text.
+*/
+const personSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: site.title,
+	description: site.description,
+	url: Astro.site?.href ?? 'https://justindsims.com/',
+	email: `mailto:${site.email}`,
+	sameAs: [site.linkedin, site.vimeo],
+};
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
 	</head>
 	<body>
 		<Header />
