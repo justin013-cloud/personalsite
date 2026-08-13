@@ -7,7 +7,7 @@ role: Senior Video Production Specialist
 date: 2026-01-05
 brief: A condensed commercial built to entice utility companies to look at how their business is structured and see if the CSG solution is right for them.
 award: ''
-featured: true
+featured: false
 order: 7
 ---
 
