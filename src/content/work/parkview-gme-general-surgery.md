@@ -9,7 +9,7 @@ brief: Parkview Health was starting a General Medical Education (where graduates
 award: ''
 featured: false
 order: 5
-draft: true
+draft: false
 ---
 
 #### GME = Graduate Medical Education
