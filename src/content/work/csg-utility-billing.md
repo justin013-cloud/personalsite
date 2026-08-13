@@ -6,8 +6,9 @@ client: CSG Systems
 role: Senior Video Production Specialist
 date: 2026-01-05
 brief: A condensed commercial built to entice utility companies to look at how their business is structured and see if the CSG solution is right for them.
+award: ''
 featured: true
-order: 3
+order: 7
 ---
 
 For this project, CSG wanted to make a direct appeal to utility companies. I was given a script and asked to create the video using motion graphics and stock imagery.
