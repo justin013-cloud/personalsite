@@ -8,7 +8,7 @@ date: 2025-04-30
 brief: A video about connecting with telecom customers in the right way at the right time. For me, it was about the position of the frame and the stock imagery.
 award: ''
 poster: ''
-featured: true
+featured: false
 order: 8
 draft: false
 ---
