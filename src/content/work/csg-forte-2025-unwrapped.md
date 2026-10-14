@@ -8,7 +8,7 @@ date: 2025-12-08
 brief: An end-of-the-year reel for CSG Forte. The idea behind it was to create a Spotify type wrap up for all the accomplishments in 2025.
 award: ''
 featured: true
-order: 2
+order: 3
 ---
 
 For each project, I like to know the purpose and how it will be used. Unlike some of the other videos on my site, this project was only going to social media. Most social media content is viewed on mobile devices, which means a vertical frame is best.
