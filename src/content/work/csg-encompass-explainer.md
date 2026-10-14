@@ -7,8 +7,9 @@ role: Senior Video Production Specialist
 date: 2026-07-10
 brief: A combination of motion graphics, stock video and some subtle VFX to explain an advanced technology to telecom companies for B2B clients. A good example of B2B2B marketing.
 award: ''
+poster: /src/assets/uploads/CSG-EncompassExplainer2.jpg
 featured: true
-order: 1
+order: 3
 ---
 
 For this project, I was brought in early enough to write a couple drafts of the script. It was passed around between product marketers and subject matter experts. Eventually, we ended up with this script that hits every point the stakeholders wanted in about 2 minutes. 
