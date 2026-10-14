@@ -8,7 +8,7 @@ date: 2023-01-06
 brief: Exactech had experienced some bad publicity, and they contacted B&Y to help reset their image. Our idea was to highlight the surgeons and make them the heroes with Exactech by their side.
 award: Gold Winner · Aster Awards 2024
 featured: true
-order: 3
+order: 1
 ---
 
 Hospitals and doctors choose which technologies and tools they want to use to help their patients. In this campaign to help Exactech's positioning in the market, B&Y decided to highlight the surgeon as the real hero--they're the face of the surgery, the technology, and the overall well-being of the patient. That's why the language is direct and focused toward surgeons.
