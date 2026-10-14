@@ -7,9 +7,9 @@ role: Video & Motion Director at B&Y
 date: 2019-06-04
 brief: Initially a one-off project for a trade-show that developed into a video series and campaign.
 award: Silver Winner · The Telly Awards 2020
-poster: ''
+poster: /src/assets/uploads/Introducing_ZB-Connect.jpg
 featured: true
-order: 4
+order: 2
 draft: false
 ---
 
