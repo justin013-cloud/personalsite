@@ -1,9 +1,9 @@
 {
-  "metaDescription": "Post-production professional with 15+ years tying motion graphics and video editing with storytelling.",
+  "metaDescription": "Video producer, editor, and motion graphics designer specializing in visual storytelling, creative direction, live action, post-production, and animation.",
   "pageEyebrow": "About",
   "pageTitle": "Who I am",
-  "profileLead": "Video production professional with 15+ years of experience bridging live action, cinematography, editing and motion graphics to craft cohesive, story-driven content.",
-  "profileBody": "Equally fluent on set and in post-production, combining both disciplines to build narratives that are visually compelling at every layer. Experienced leading creative production for agencies and in-house teams across advertising, B2B, B2C or B2B2X.",
+  "profileLead": "I’m a storyteller first. Video, editing, and motion graphics are just the tools I use to figure out what a story needs and bring it to life.",
+  "profileBody": "Hi! I’m Justin, and I’m a big believer in letting the story dictate how it needs to be told, whether that means live action, motion graphics, or a bit of both. I turn complex ideas into compelling visual experiences through creative direction, post-production, emerging AI technologies, and team leadership. I’ve worked across B2B, B2C, social, broadcast, digital, and live events, but what matters most to me is creating work that makes an impact and stays with the viewer. I bring a hands-on approach to creative leadership, from the first idea through the final frame, and I’m always looking for better ways to tell a story while keeping the audience at the center.",
   "historyHeading": "Professional history",
   "awardsHeading": "Awards & recognition",
   "skillsHeading": "Capabilities & tools",
@@ -11,45 +11,48 @@
   "contactHeading": "Get in touch",
   "jobs": [
     {
-      "role": "Senior Video Production Specialist",
+      "role": "Senior Video Producer",
       "company": "CSG Systems",
       "note": "Acquired by NEC Corporation",
-      "period": "2024 – 2026",
+      "period": "AUG 2024 – AUG 2026",
       "points": [
-        "Produce 50+ videos annually spanning motion graphics, AI-generated content, stock footage, voice-over, and music for trade shows, broadcast TV, social media, and web distribution.",
-        "Led an LED installation project, designing motion graphics for an immersive 8x8 foot cube display as part of a live internal broadcast presentation.",
-        "Partner cross-functionally to develop video strategies, campaign messaging, and branded content across B2B audiences."
+        "Produced and edited 50+ videos annually across social, web, broadcast, trade shows, and branded campaigns, shaping complex material into clear, engaging visual stories.",
+        "Led video and motion production for an 8x8-foot LED cube installation, adapting content for an immersive large-format display and audience experience.",
+        "Evolved the brand’s visual language through reusable motion graphics templates and MOGRTs in Adobe After Effects and Premiere Pro, creating consistency across live broadcasts and branded content.",
+        "Collaborated with global, cross-functional teams using Frame.io, Microsoft Teams, SharePoint, OneDrive, and Asana to manage reviews, feedback, versioning, and asset delivery."
       ]
     },
     {
       "role": "Video & Motion Director",
       "company": "Boyden & Youngblutt",
       "note": "",
-      "period": "2019 – 2024",
+      "period": "JAN 2019 – AUG 2024",
       "points": [
-        "Directed end-to-end live action and motion graphics productions for advertising campaigns, applying cinematography, editing, dynamic typography, and visual design throughout each project.",
-        "Built and led a small creative team, managing workflows and mentoring junior talent from intern to full staff.",
-        "Collaborated with clients, internal staff, and vendors to deliver polished final projects for organizations ranging from startups to multinational corporations."
+        "Established the agency’s video and motion function as its first dedicated video hire, then built and led a team of editors and motion graphics animators while staying hands-on in production and coordinating freelancers, vendors, schedules, reviews, and delivery.",
+        "Directed and edited video projects across interviews, live action, motion graphics, typography, color, sound, and visual design, shaping work from raw footage through final delivery.",
+        "Produced and edited 500+ healthcare provider interviews, finding concise, approachable stories within unscripted conversations for a broad audience."
       ]
     },
     {
       "role": "Videographer & Animator",
       "company": "Aptera Software",
       "note": "Acquired by Core BTS",
-      "period": "2017 – 2018",
+      "period": "FEB 2017 – DEC 2018",
       "points": [
-        "Developed, filmed, edited, and animated marketing videos showcasing custom software solutions across desktop, web, and mobile platforms.",
-        "Contributed to a full company rebrand including logo design, typography animation, visual identity systems, and brand messaging strategy."
+        "Built the company’s video capability as its first full-time videographer and animator, producing end-to-end marketing videos for custom software solutions across desktop, web, and mobile platforms.",
+        "Created and edited a 70+ video social series that established a repeatable content framework while expanding the company’s digital presence.",
+        "Supported a company rebrand and expanded its digital presence through logo animation, dynamic typography, visual identity, and brand messaging.",
+        "Developed an interactive AR business-card experience with a Unity developer and sales team, creating personalized video introductions for individual salespeople that launched when customers scanned their business cards through a mobile AR application."
       ]
     },
     {
       "role": "Digital Media Specialist",
       "company": "LYFT Digital / Enspire Software / ENS Group",
       "note": "Acquired by Corsica Technologies",
-      "period": "2013 – 2016",
+      "period": "APR 2013 – DEC 2016",
       "points": [
-        "Created and produced branding videos for multiple companies and subsidiaries, managing end-to-end creative production from concept through final delivery.",
-        "Preserved distinct brand identities across clients using brand voice, typography, iconography, and color theory in both live action and motion graphics projects."
+        "Produced branding videos across multiple companies and subsidiaries, managing creative concept development, storyboarding, scriptwriting, cinematography, editing, motion graphics, audio, and final delivery through Adobe Creative Suite.",
+        "Translated client brand standards into live-action and motion graphics content for startups and established organizations, maintaining consistency across brand voice, dynamic typography, iconography, color systems, and visual identity."
       ]
     },
     {
@@ -110,10 +113,10 @@
   "competencies": [
     "Motion Graphics",
     "Video Editing",
+    "Visual Storytelling",
     "Cinematography",
     "Lighting",
     "Color Grading",
-    "Visual Storytelling",
     "Brand Identity",
     "Typography",
     "Storyboarding",
@@ -125,13 +128,12 @@
     "Team Management"
   ],
   "tools": [
-    "Adobe Creative Cloud",
-    "After Effects",
-    "Premiere Pro",
-    "Audition",
-    "Illustrator",
-    "Photoshop",
-    "Firefly",
+    "Adobe After Effects",
+    "Adobe Premiere Pro",
+    "Adobe Audition",
+    "Adobe Illustrator",
+    "Adobe Photoshop",
+    "Adobe Firefly",
     "Figma",
     "Google Veo 3",
     "ElevenLabs",
